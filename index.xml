@@ -15,17 +15,64 @@
         <description></description>
         </item>
         <item>
-        <title>asdfsadfasdf</title>
-        <link>https://sudo-echo-jin.github.io/p/hello-worlasdfasdf/</link>
+        <title>BabyEncryption</title>
+        <link>https://sudo-echo-jin.github.io/p/babyencryption/</link>
         <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
         
-        <guid>https://sudo-echo-jin.github.io/p/hello-worlasdfasdf/</guid>
-        <description>&lt;img src="https://sudo-echo-jin.github.io/p/hello-worlasdfasdf/bubbles.jpg" alt="Featured image of post asdfsadfasdf" /&gt;&lt;h1 id=&#34;asdflaks-new-post&#34;&gt;asdflaks new post&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;asldkjf&lt;/li&gt;
-&lt;li&gt;sdflkj&lt;/li&gt;
-&lt;li&gt;sdf&lt;/li&gt;
-&lt;/ul&gt;
+        <guid>https://sudo-echo-jin.github.io/p/babyencryption/</guid>
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/babyencryption/bubbles.jpg" alt="Featured image of post BabyEncryption" /&gt;&lt;h1 id=&#34;scenario&#34;&gt;Scenario&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;You are after an organised crime group which is responsible for the illegal weapon market in your country. As a secret agent, you have infiltrated the group enough to be included in meetings with clients. During the last negotiation, you found one of the confidential messages for the customer. It contains crucial information about the delivery. Do you think you can decrypt it?&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;lets-begin&#34;&gt;Let&amp;rsquo;s begin&lt;/h1&gt;
+&lt;p&gt;We&amp;rsquo;re given a zip file and a password &amp;ldquo;hackthebox&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/babyencryption/image.png&#34;
+	width=&#34;458&#34;
+	height=&#34;319&#34;
+	srcset=&#34;https://sudo-echo-jin.github.io/p/babyencryption/image_hu6b7ac49e98923262288c6fc9405107ab_47737_480x0_resize_box_3.png 480w, https://sudo-echo-jin.github.io/p/babyencryption/image_hu6b7ac49e98923262288c6fc9405107ab_47737_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;hi&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;143&#34;
+		data-flex-basis=&#34;344px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Unzip it, we get two files, &lt;em&gt;msg.enc&lt;/em&gt; and &lt;em&gt;chall.py&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://velog.velcdn.com/images/jin71931/post/dcbdfc13-dd52-4d9a-b363-86d834e09150/image.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The content of the msg.enc&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://velog.velcdn.com/images/jin71931/post/e433c98d-d324-4593-aef8-3bb22b597b98/image.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The content of the chall.py&lt;/p&gt;
+&lt;p&gt;It seems like it is the encryption algorithm used to encrypt the secret message which resulted in msg.enc. It is not a complete python code which cannot be run as usual, because there&amp;rsquo;s no such library as &amp;ldquo;secret&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;However, at least we can
+&lt;img src=&#34;https://sudo-echo-jin.github.io/p/babyencryption/bubbles.jpg&#34;
+	width=&#34;1920&#34;
+	height=&#34;1200&#34;
+	srcset=&#34;https://sudo-echo-jin.github.io/p/babyencryption/bubbles_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_480x0_resize_q75_box.jpg 480w, https://sudo-echo-jin.github.io/p/babyencryption/bubbles_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_1024x0_resize_q75_box.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
