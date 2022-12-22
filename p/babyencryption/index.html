@@ -258,7 +258,7 @@
 
 
                 <time class="article-time--reading">
-                    1 minute read
+                    4 minute read
                 </time>
             </div>
         
@@ -275,26 +275,19 @@
     
     <h1 id="scenario">Scenario</h1>
 <blockquote>
-<p>&ldquo;You are after an organised crime group which is responsible for the illegal weapon market in your country. As a secret agent, you have infiltrated the group enough to be included in meetings with clients. During the last negotiation, you found one of the confidential messages for the customer. It contains crucial information about the delivery. Do you think you can decrypt it?&rdquo;</p>
+<p>&ldquo;You are after an organised crime group which is responsible for the illegal weapon market in your country. As a secret agent, you have infiltrated the group enough to be included in meetings with clients. During the last negotiation, you found one of the confidential messages for the customer. It contains crucial information about the delivery. Do you think you can decrypt it?&rdquo; - HTB challenge</p>
 </blockquote>
 <h1 id="lets-begin">Let&rsquo;s begin</h1>
-<p>We&rsquo;re given a zip file and a password &ldquo;hackthebox&rdquo;.</p>
-<p><img src="/p/babyencryption/image.png"
-	width="458"
-	height="319"
-	srcset="/p/babyencryption/image_hu6b7ac49e98923262288c6fc9405107ab_47737_480x0_resize_box_3.png 480w, /p/babyencryption/image_hu6b7ac49e98923262288c6fc9405107ab_47737_1024x0_resize_box_3.png 1024w"
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/babyencryption/a1.png"
+	
+	
+	
 	loading="lazy"
 	
-		alt="hi"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="143"
-		data-flex-basis="344px"
 	
 ></p>
-<p>Unzip it, we get two files, <em>msg.enc</em> and <em>chall.py</em></p>
-<p><img src="https://velog.velcdn.com/images/jin71931/post/dcbdfc13-dd52-4d9a-b363-86d834e09150/image.png"
+<p>We&rsquo;re given two files from the zip file, msg.enc and chall.py.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/babyencryption/a2.png"
 	
 	
 	
@@ -303,7 +296,7 @@
 	
 ></p>
 <p>The content of the msg.enc</p>
-<p><img src="https://velog.velcdn.com/images/jin71931/post/e433c98d-d324-4593-aef8-3bb22b597b98/image.png"
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/babyencryption/a3.png"
 	
 	
 	
@@ -312,20 +305,350 @@
 	
 ></p>
 <p>The content of the chall.py</p>
-<p>It seems like it is the encryption algorithm used to encrypt the secret message which resulted in msg.enc. It is not a complete python code which cannot be run as usual, because there&rsquo;s no such library as &ldquo;secret&rdquo;.</p>
-<p>However, at least we can
-<img src="/p/babyencryption/bubbles.jpg"
-	width="1920"
-	height="1200"
-	srcset="/p/babyencryption/bubbles_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_480x0_resize_q75_box.jpg 480w, /p/babyencryption/bubbles_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_1024x0_resize_q75_box.jpg 1024w"
+<p>It seems like the encryption algorithm used to generate msg.enc. There we can see that <em>MSG</em> is imported from the &ldquo;secret&rdquo; which we are trying to recover. If you take a closer look into the encryption function, modulo operation is used. In other words, it is impossible to make a symmetrical decrypting equation (well, at least in my head).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python3" data-lang="python3"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">string</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># from secret import MSG</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">encryption</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ct</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ct</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">123</span> <span class="o">*</span> <span class="n">char</span> <span class="o">+</span> <span class="mi">18</span><span class="p">)</span> <span class="o">%</span> <span class="mi">256</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#ct = encryption(MSG)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># f = open(&#39;./msg.enc&#39;,&#39;w&#39;)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># f.write(ct.hex())</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># f.close()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sample1</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;a&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">sample2</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;ab&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ct1</span> <span class="o">=</span> <span class="n">encryption</span><span class="p">(</span><span class="n">sample1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ct2</span> <span class="o">=</span> <span class="n">encryption</span><span class="p">(</span><span class="n">sample2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">ct1</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">ct2</span><span class="o">.</span><span class="n">hex</span><span class="p">())</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Modified some codes to see how this works.</p>
+<p>The output:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python3" data-lang="python3"><span class="line"><span class="cl"><span class="n">ad</span> <span class="c1"># from b&#39;a&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">ad28</span> <span class="c1"># from b&#39;ab&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This encryption algorithm takes each bytes in the string, does some maths, and prints out in the &lsquo;double digit&rsquo; hex format.</p>
+<p>&lsquo;a&rsquo; -&gt; &lsquo;ad&rsquo;,</p>
+<p>&lsquo;b&rsquo; -&gt; &lsquo;28&rsquo;</p>
+<p>With knowing all these, one thing we can try is to map all printable characters to those encrypted hex outputs. At the end, we can split the encrypted message by chunk of two bytes and use the map to convert those back to plain text.</p>
+<p>Example:</p>
+<p>secret = 6e0a9372ec49a3</p>
+<p>6e0a9372ec49a3 -&gt; 6e|0a|93|72|ec|49|a3 -&gt; map[&lsquo;62&rsquo;], map[&lsquo;0a&rsquo;], map[&lsquo;93&rsquo;], map[&lsquo;72&rsquo;] &hellip;</p>
+<p>The code:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python3" data-lang="python3"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">string</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">createMap</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MAP</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">enc</span> <span class="o">=</span> <span class="p">(</span><span class="mi">123</span> <span class="o">*</span> <span class="n">char</span> <span class="o">+</span> <span class="mi">18</span><span class="p">)</span> <span class="o">%</span> <span class="mi">256</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ct</span> <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="n">enc</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># just in case of having single digit hex. &#39;e&#39; -&gt; &#39;0e&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">MAP</span><span class="p">[</span><span class="n">ct</span><span class="p">]</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">MAP</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">S</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">printable</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span> <span class="c1"># Assign all printable characters in byte format to variable &#39;S&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">MAP</span> <span class="o">=</span> <span class="n">createMap</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">secret</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter encrypted message: &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">secret</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ct</span> <span class="o">=</span> <span class="n">secret</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">MAP</span><span class="p">[</span><span class="n">ct</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Created map:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">22 -&gt; 0
+</span></span><span class="line"><span class="cl">9d -&gt; 1
+</span></span><span class="line"><span class="cl">18 -&gt; 2
+</span></span><span class="line"><span class="cl">93 -&gt; 3
+</span></span><span class="line"><span class="cl">0e -&gt; 4
+</span></span><span class="line"><span class="cl">89 -&gt; 5
+</span></span><span class="line"><span class="cl">04 -&gt; 6
+</span></span><span class="line"><span class="cl">7f -&gt; 7
+</span></span><span class="line"><span class="cl">fa -&gt; 8
+</span></span><span class="line"><span class="cl">75 -&gt; 9
+</span></span><span class="line"><span class="cl">ad -&gt; a
+</span></span><span class="line"><span class="cl">28 -&gt; b
+</span></span><span class="line"><span class="cl">a3 -&gt; c
+</span></span><span class="line"><span class="cl">1e -&gt; d
+</span></span><span class="line"><span class="cl">99 -&gt; e
+</span></span><span class="line"><span class="cl">14 -&gt; f
+</span></span><span class="line"><span class="cl">8f -&gt; g
+</span></span><span class="line"><span class="cl">0a -&gt; h
+</span></span><span class="line"><span class="cl">85 -&gt; i
+</span></span><span class="line"><span class="cl">00 -&gt; j
+</span></span><span class="line"><span class="cl">7b -&gt; k
+</span></span><span class="line"><span class="cl">f6 -&gt; l
+</span></span><span class="line"><span class="cl">71 -&gt; m
+</span></span><span class="line"><span class="cl">ec -&gt; n
+</span></span><span class="line"><span class="cl">67 -&gt; o
+</span></span><span class="line"><span class="cl">e2 -&gt; p
+</span></span><span class="line"><span class="cl">5d -&gt; q
+</span></span><span class="line"><span class="cl">d8 -&gt; r
+</span></span><span class="line"><span class="cl">53 -&gt; s
+</span></span><span class="line"><span class="cl">ce -&gt; t
+</span></span><span class="line"><span class="cl">49 -&gt; u
+</span></span><span class="line"><span class="cl">c4 -&gt; v
+</span></span><span class="line"><span class="cl">3f -&gt; w
+</span></span><span class="line"><span class="cl">ba -&gt; x
+</span></span><span class="line"><span class="cl">35 -&gt; y
+</span></span><span class="line"><span class="cl">b0 -&gt; z
+</span></span><span class="line"><span class="cl">4d -&gt; A
+</span></span><span class="line"><span class="cl">c8 -&gt; B
+</span></span><span class="line"><span class="cl">43 -&gt; C
+</span></span><span class="line"><span class="cl">be -&gt; D
+</span></span><span class="line"><span class="cl">39 -&gt; E
+</span></span><span class="line"><span class="cl">b4 -&gt; F
+</span></span><span class="line"><span class="cl">2f -&gt; G
+</span></span><span class="line"><span class="cl">aa -&gt; H
+</span></span><span class="line"><span class="cl">25 -&gt; I
+</span></span><span class="line"><span class="cl">a0 -&gt; J
+</span></span><span class="line"><span class="cl">1b -&gt; K
+</span></span><span class="line"><span class="cl">96 -&gt; L
+</span></span><span class="line"><span class="cl">11 -&gt; M
+</span></span><span class="line"><span class="cl">8c -&gt; N
+</span></span><span class="line"><span class="cl">07 -&gt; O
+</span></span><span class="line"><span class="cl">82 -&gt; P
+</span></span><span class="line"><span class="cl">fd -&gt; Q
+</span></span><span class="line"><span class="cl">78 -&gt; R
+</span></span><span class="line"><span class="cl">f3 -&gt; S
+</span></span><span class="line"><span class="cl">6e -&gt; T
+</span></span><span class="line"><span class="cl">e9 -&gt; U
+</span></span><span class="line"><span class="cl">64 -&gt; V
+</span></span><span class="line"><span class="cl">df -&gt; W
+</span></span><span class="line"><span class="cl">5a -&gt; X
+</span></span><span class="line"><span class="cl">d5 -&gt; Y
+</span></span><span class="line"><span class="cl">50 -&gt; Z
+</span></span><span class="line"><span class="cl">ed -&gt; !
+</span></span><span class="line"><span class="cl">68 -&gt; &#34;
+</span></span><span class="line"><span class="cl">e3 -&gt; #
+</span></span><span class="line"><span class="cl">5e -&gt; $
+</span></span><span class="line"><span class="cl">d9 -&gt; %
+</span></span><span class="line"><span class="cl">54 -&gt; &amp;
+</span></span><span class="line"><span class="cl">cf -&gt; &#39;
+</span></span><span class="line"><span class="cl">4a -&gt; (
+</span></span><span class="line"><span class="cl">c5 -&gt; )
+</span></span><span class="line"><span class="cl">40 -&gt; *
+</span></span><span class="line"><span class="cl">bb -&gt; +
+</span></span><span class="line"><span class="cl">36 -&gt; ,
+</span></span><span class="line"><span class="cl">b1 -&gt; -
+</span></span><span class="line"><span class="cl">2c -&gt; .
+</span></span><span class="line"><span class="cl">a7 -&gt; /
+</span></span><span class="line"><span class="cl">f0 -&gt; :
+</span></span><span class="line"><span class="cl">6b -&gt; ;
+</span></span><span class="line"><span class="cl">e6 -&gt; &lt;
+</span></span><span class="line"><span class="cl">61 -&gt; =
+</span></span><span class="line"><span class="cl">dc -&gt; &gt;
+</span></span><span class="line"><span class="cl">57 -&gt; ?
+</span></span><span class="line"><span class="cl">d2 -&gt; @
+</span></span><span class="line"><span class="cl">cb -&gt; [
+</span></span><span class="line"><span class="cl">46 -&gt; \
+</span></span><span class="line"><span class="cl">c1 -&gt; ]
+</span></span><span class="line"><span class="cl">3c -&gt; ^
+</span></span><span class="line"><span class="cl">b7 -&gt; _
+</span></span><span class="line"><span class="cl">32 -&gt; `
+</span></span><span class="line"><span class="cl">2b -&gt; {
+</span></span><span class="line"><span class="cl">a6 -&gt; |
+</span></span><span class="line"><span class="cl">21 -&gt; }
+</span></span><span class="line"><span class="cl">9c -&gt; ~
+</span></span><span class="line"><span class="cl">72 -&gt;  
+</span></span><span class="line"><span class="cl">65 -&gt; 	
+</span></span><span class="line"><span class="cl">e0 -&gt; 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">51 -&gt; 
+</span></span><span class="line"><span class="cl">5b -&gt; 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">d6 -&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Result:</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/babyencryption/a4.png"
+	
+	
+	
 	loading="lazy"
 	
 	
-		class="gallery-image" 
-		data-flex-grow="160"
-		data-flex-basis="384px"
-	
 ></p>
+<p>The nuclear will arrive on friday.</p>
+<p>And we got the flag.</p>
+<blockquote>
+<p>HTB{l00k_47_y0u_r3v3rs1ng_3qu4710n5_c0ngr475}</p>
+</blockquote>
 
 </section>
 
