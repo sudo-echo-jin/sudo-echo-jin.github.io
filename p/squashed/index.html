@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='windows resource'>
-<title>Windows Basic</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='HTB Squashed machine writeup'>
+<title>Squashed</title>
 
-<link rel='canonical' href='https://sudo-echo-jin.github.io/p/windows-resource/'>
+<link rel='canonical' href='https://sudo-echo-jin.github.io/p/squashed/'>
 
-<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Windows Basic'>
-<meta property='og:description' content='windows resource'>
-<meta property='og:url' content='https://sudo-echo-jin.github.io/p/windows-resource/'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Squashed'>
+<meta property='og:description' content='HTB Squashed machine writeup'>
+<meta property='og:url' content='https://sudo-echo-jin.github.io/p/squashed/'>
 <meta property='og:site_name' content='Jin&#39;s Exploit Repo'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Windows' /><meta property='article:tag' content='PowerShell' /><meta property='article:tag' content='CMD' /><meta property='article:published_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='og:image' content='https://sudo-echo-jin.github.io/p/windows-resource/bubbles.jpg' />
-<meta name="twitter:title" content="Windows Basic">
-<meta name="twitter:description" content="windows resource"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://sudo-echo-jin.github.io/p/windows-resource/bubbles.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='NFS' /><meta property='article:tag' content='X11' /><meta property='article:published_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='og:image' content='https://sudo-echo-jin.github.io/p/squashed/Squashed.png' />
+<meta name="twitter:title" content="Squashed">
+<meta name="twitter:description" content="HTB Squashed machine writeup"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://sudo-echo-jin.github.io/p/squashed/Squashed.png' />
     </head>
     <body class="
     article-page
@@ -208,13 +208,11 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
-      <ol>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#scripts">Scripts</a></li>
-        <li><a href="#windows-management-instrumentation-wmi">Windows Management Instrumentation (WMI)</a></li>
-      </ol>
-    </li>
+    <li><a href="#enumeration">Enumeration</a></li>
+    <li><a href="#http">HTTP</a></li>
+    <li><a href="#nfs">NFS</a></li>
+    <li><a href="#foothold--user-flag">Foothold &amp; User flag</a></li>
+    <li><a href="#privesc--root-flag">Privesc &amp; Root flag</a></li>
   </ol>
 </nav>
         </div>
@@ -229,13 +227,13 @@
     <article class="has-image main-article">
     <header class="article-header">
         <div class="article-image">
-            <a href="/p/windows-resource/">
-                <img src="/p/windows-resource/bubbles_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_800x0_resize_q75_box.jpg"
-                        srcset="/p/windows-resource/bubbles_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_800x0_resize_q75_box.jpg 800w, /p/windows-resource/bubbles_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_1600x0_resize_q75_box.jpg 1600w"
+            <a href="/p/squashed/">
+                <img src="/p/squashed/Squashed_hu1e9c71f86584122ebde96c80c4e21e87_340261_800x0_resize_box_3.png"
+                        srcset="/p/squashed/Squashed_hu1e9c71f86584122ebde96c80c4e21e87_340261_800x0_resize_box_3.png 800w, /p/squashed/Squashed_hu1e9c71f86584122ebde96c80c4e21e87_340261_1600x0_resize_box_3.png 1600w"
                         width="800" 
-                        height="500" 
+                        height="606" 
                         loading="lazy"
-                        alt="Featured image of post Windows Basic" />
+                        alt="Featured image of post Squashed" />
                 
             </a>
         </div>
@@ -245,8 +243,8 @@
     
     <header class="article-category">
         
-            <a href="/categories/resources/" style="background-color: #2a9d8f; color: #fff;">
-                Resources
+            <a href="/categories/box/" style="background-color: #2a9d8f; color: #fff;">
+                Box
             </a>
         
     </header>
@@ -254,12 +252,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/windows-resource/">Windows Basic</a>
+            <a href="/p/squashed/">Squashed</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            windows resource
+            HTB Squashed machine writeup
         </h3>
         
     </div>
@@ -295,7 +293,7 @@
 
 
                 <time class="article-time--reading">
-                    1 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -310,51 +308,204 @@
     <section class="article-content">
     
     
-    <h1 id="powershell-commands">Powershell Commands</h1>
-<h3 id="services">Services</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># List all running services</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-Service</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="py">Status</span> <span class="o">-eq</span> <span class="s2">&#34;Running&#34;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">select </span><span class="n">-First</span> <span class="mf">2</span> <span class="p">|</span><span class="nb">fl
-</span></span></span><span class="line"><span class="cl"><span class="nb"></span>
-</span></span><span class="line"><span class="cl"><span class="c"># Handle specific service</span>
-</span></span><span class="line"><span class="cl"><span class="nb">sc </span><span class="n">qc</span> <span class="n">SERVICE_NAME</span> <span class="c"># Query service</span>
-</span></span><span class="line"><span class="cl"><span class="nb">sc start </span><span class="n">SERVICE_NAME</span>
-</span></span><span class="line"><span class="cl"><span class="nb">sc </span><span class="n">stop</span> <span class="n">SERVICE_NAME</span> 
-</span></span><span class="line"><span class="cl"><span class="nb">sc </span><span class="n">config</span> <span class="n">SERVICE_NAME</span> <span class="n">KEY</span><span class="p">=</span><span class="n">VALUE</span> <span class="c"># ex) sc config wuauserv binPATH=C:\Windows\pwn.exe</span>
-</span></span><span class="line"><span class="cl"><span class="nb">sc </span><span class="n">sdshow</span> <span class="n">SERVICE_NAME</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># List running application under currently logged in user</span>
-</span></span><span class="line"><span class="cl"><span class="n">reg</span> <span class="n">query</span> <span class="n">HKEY_CURRENT_USER</span><span class="p">\</span><span class="n">Software</span><span class="p">\</span><span class="n">Microsoft</span><span class="p">\</span><span class="n">Windows</span><span class="p">\</span><span class="n">CurrentVersion</span><span class="p">\</span><span class="n">Run</span> 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Query specific service with the registry (returns more info than sc)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-ACL</span> <span class="n">-Path</span> <span class="n">HKLM</span><span class="err">:</span><span class="p">\</span><span class="n">PATH</span><span class="p">\</span><span class="n">TO</span><span class="p">\</span><span class="n">SERVICE</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Check Windows Defender</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-MpComputerStatus</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="scripts">Scripts</h3>
+    <h2 id="enumeration">Enumeration</h2>
+<p>Our target&rsquo;s IP address is 10.10.11.191.</p>
+<p>Let&rsquo;s begin with port scanning.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/a1.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>We can see that SSH, HTTP, and NFS is running.</p>
+<h2 id="http">HTTP</h2>
+<p>Firstly, checked the website, but there was nothing interesting or vulnerable. Links were redirections to current page. (#)</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/a2.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="nfs">NFS</h2>
+<p>From the scan result, we can see port 111 and 2049 opened, which means the NFS protocol is running. Let&rsquo;s check the list of available exports.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/a3.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>There are two exports allowed to anyone (*). Create two directories and let&rsquo;s mount them respectively to our local system.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/a4.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>As we can see above in the screenshot, it seems like the /var/www/html directory is owned by a user whose uid is 2017, and the user ross&rsquo;s uid is 1001 on their system. Let&rsquo;s check the common vulnerability vector, no_root_squash.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/a5.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>no_root_squash is not set. Then what about normal users? Let&rsquo;s make two new users with the uid 2017 and 1001.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/a6.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+<img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/a7.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>With these two users, checked if any of these are writable and yes, we can write stuffs in mnt1 share which is web root.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/a8.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="foothold--user-flag">Foothold &amp; User flag</h2>
+<p>If we can write something into the /var/www/html, this is such a big red flag and this is a way to get the initial foothold to the target system. We can upload malicious php payload in this directory to spawn a reverse shell. We will use one of the most famous payload, pentestermonkey&rsquo;s php-reverse-shell.php (<a class="link" href="https://pentestmonkey.net/tools/web-shells/php-reverse-shell%29"  target="_blank" rel="noopener"
+    >https://pentestmonkey.net/tools/web-shells/php-reverse-shell)</a>.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/a9.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>Setup a netcat listener on port 9999 and execute the payload with the curl command or directly accessing through the web browser.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b1.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>We got in. It seems like the user alex is the one whose uid is 2017. We should upgrade our shell first.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b2.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>Navigated to alex&rsquo;s home directory and found the user flag.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b3.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<h2 id="privesc--root-flag">Privesc &amp; Root flag</h2>
+<p>After basic enumeration with linpeas, user ross is currently logged into the system, running on the gnome session on tty7.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b4.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>Let&rsquo;s go back to the NFS share of /home/ross mounted on mnt2 on our local system since alex doesn&rsquo;t have permission to fully view ross&rsquo;s home directory. But remember that we can impersonate ross due to misconfiguration in NFS service.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b5.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>There are many files but we have to focus on the files that are only readable by the user ross which cannot be seen with the alex&rsquo;s user account inside the target system. The most intriguing one of them is .Xauthority file, since we know ross is running a graphical environment.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b6.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+<a class="link" href="https://askubuntu.com/questions/300682/what-is-the-xauthority-file"  target="_blank" rel="noopener"
+    >https://askubuntu.com/questions/300682/what-is-the-xauthority-file</a></p>
+<p>Also looking into .xsession-errors, we get some more information.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b7.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>Ross is running lightdm and it is likely that ross is running on DISPLAY:0. We can verify it by taking a screenshot using the credential cookie from .Xauthority.</p>
+<p>Copy .Xauthority to target machine so that alex can import it.</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b8.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+<img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b9.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+<img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b10.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>Exported the ross&rsquo;s Xauthority cookie and tried to take screenshot. (Had some trouble with the xwd syntax)</p>
+<p>Once the screenshot is taken, let&rsquo;s transport it back to our local machine and see the picture.
+<img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b11.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+>
+<img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b12.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>Copied the file remotely with the python simple web server and converted the xwd image to png. This time, instead of base64, we use python webserver because the base64 on image data could yield too much text output.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -365,32 +516,36 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="p">.\</span><span class="n">SCRIPT</span><span class="p">.</span><span class="py">ps1</span> <span class="c"># Execute script</span>
-</span></span><span class="line"><span class="cl"><span class="p">.\</span><span class="n">SCRIPT</span><span class="p">.</span><span class="n">ps1</span><span class="p">;</span><span class="n">MODULE</span> <span class="c"># Excute particular module from the script</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Import-Module</span> <span class="p">.\</span><span class="n">SCRIPT</span><span class="p">.</span><span class="py">ps1</span> <span class="c"># Import modules from the script</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-Module</span> <span class="c"># List all loaded modules</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-ExecutionPolicy</span> <span class="n">-List</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Set-ExecutionPolicy</span> <span class="n">POLICY</span> <span class="n">-Scope</span> <span class="n">SCOPE</span> <span class="c"># Can set policy if proper rights given. Limited to user session</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Alex</span>
+</span></span><span class="line"><span class="cl">python -m http.server <span class="c1"># host the server</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Other side</span>
+</span></span><span class="line"><span class="cl">wget 10.10.11.191:8000/screenshot.xwd
+</span></span><span class="line"><span class="cl">convert screenshot.xwd png.png
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="windows-management-instrumentation-wmi">Windows Management Instrumentation (WMI)</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># The command &#34;wmic&#34; is suited for CMD where as Powershell utilizes &#34;Get-WmiObject&#34; and &#34;Invoke-WmiMethod</span>
-</span></span><span class="line"><span class="cl"><span class="n">wmic</span> <span class="c"># Used in CMD</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-WmiObject</span> <span class="c"># Get instances or information of WMI classes</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Get-WmiObject</span> <span class="n">win32_useraccount</span> <span class="c"># List user accounts with sid</span>
-</span></span><span class="line"><span class="cl"><span class="nb">Invoke-WmiMethod</span> <span class="c"># Get methods of WMI objects</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
+</div><p>Open png.png
+<img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b13.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>We got root password. &ldquo;cah$mei7rai9A&rdquo;</p>
+<p><img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b14.png"
+	
+	
+	
+	loading="lazy"
+	
+	
+></p>
+<p>We got the root flag.</p>
+<p>It is easy to fall into a rabit hole when people are investigating the ross&rsquo;s home directory via NFS share and find the KeePass database file. I also spent a lot of time on trying to crack the KeePass database. However, ross was actually running this program on the GUI and the way to get this was to steal ross&rsquo;s Xauth cookie to see ross&rsquo;s screen.</p>
+<p>Machine pwned.</p>
+
 </section>
 
 
@@ -398,11 +553,9 @@
     
     <section class="article-tags">
         
-            <a href="/tags/windows/">Windows</a>
+            <a href="/tags/nfs/">NFS</a>
         
-            <a href="/tags/powershell/">PowerShell</a>
-        
-            <a href="/tags/cmd/">CMD</a>
+            <a href="/tags/x11/">X11</a>
         
     </section>
 
@@ -428,39 +581,6 @@
     
 
     
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">Related content</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/p/file-inclusion/">
-        
-        
-            <div class="article-image">
-                <img src="/p/file-inclusion/bubbles.e318e5a9f92f6394af6f7d7edae19d0d_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_250x150_fill_q75_box_smart1.jpg" 
-                        width="250" 
-                        height="150" 
-                        loading="lazy"
-                        alt="Featured image of post LFI"
-                        data-key="File Inclusion" 
-                        data-hash="md5-4xjlqfkvY5Svb31&#43;2uGdDQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">LFI</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
 
      
     

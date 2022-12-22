@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Box on Jin&#39;s Exploit Repo</title>
-        <link>https://sudo-echo-jin.github.io/categories/box/</link>
-        <description>Recent content in Box on Jin&#39;s Exploit Repo</description>
+        <title>X11 on Jin&#39;s Exploit Repo</title>
+        <link>https://sudo-echo-jin.github.io/tags/x11/</link>
+        <description>Recent content in X11 on Jin&#39;s Exploit Repo</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/categories/box/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/tags/x11/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Squashed</title>
         <link>https://sudo-echo-jin.github.io/p/squashed/</link>
         <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
