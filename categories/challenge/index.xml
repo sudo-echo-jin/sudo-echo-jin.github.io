@@ -12,7 +12,9 @@
         <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/p/babyencryption/</guid>
-        <description>&lt;img src="https://sudo-echo-jin.github.io/p/babyencryption/bubbles.jpg" alt="Featured image of post BabyEncryption" /&gt;&lt;h1 id=&#34;scenario&#34;&gt;Scenario&lt;/h1&gt;
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/babyencryption/baby.jpg" alt="Featured image of post BabyEncryption" /&gt;&lt;p&gt;Cover photo by &lt;a class=&#34;link&#34; href=&#34;https://unsplash.com/@invent&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://unsplash.com/@invent&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;scenario&#34;&gt;Scenario&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&amp;ldquo;You are after an organised crime group which is responsible for the illegal weapon market in your country. As a secret agent, you have infiltrated the group enough to be included in meetings with clients. During the last negotiation, you found one of the confidential messages for the customer. It contains crucial information about the delivery. Do you think you can decrypt it?&amp;rdquo; - HTB challenge&lt;/p&gt;
 &lt;/blockquote&gt;

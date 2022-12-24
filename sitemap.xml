@@ -29,16 +29,16 @@
     <loc>https://sudo-echo-jin.github.io/tags/easy/</loc>
     <lastmod>2022-03-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sudo-echo-jin.github.io/p/file-inclusion/</loc>
-    <lastmod>2022-03-06T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://sudo-echo-jin.github.io/tags/nfs/</loc>
     <lastmod>2022-03-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sudo-echo-jin.github.io/tags/owasp-top-10/</loc>
+    <loc>https://sudo-echo-jin.github.io/page/</loc>
     <lastmod>2022-03-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://sudo-echo-jin.github.io/page/</loc>
+    <loc>https://sudo-echo-jin.github.io/tags/payload/</loc>
+    <lastmod>2022-03-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sudo-echo-jin.github.io/p/file-inclusion/</loc>
     <lastmod>2022-03-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sudo-echo-jin.github.io/post/</loc>
@@ -54,9 +54,6 @@
     <lastmod>2022-03-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sudo-echo-jin.github.io/tags/</loc>
-    <lastmod>2022-03-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sudo-echo-jin.github.io/tags/web/</loc>
     <lastmod>2022-03-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sudo-echo-jin.github.io/tags/windows/</loc>
