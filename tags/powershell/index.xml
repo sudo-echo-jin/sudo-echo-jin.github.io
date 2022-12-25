@@ -6,13 +6,13 @@
         <description>Recent content in PowerShell on Jin&#39;s Exploit Repo</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/tags/powershell/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Windows Basic</title>
+        <lastBuildDate>Mon, 19 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/tags/powershell/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Windows Fundamental</title>
         <link>https://sudo-echo-jin.github.io/p/windows-resource/</link>
-        <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 19 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/p/windows-resource/</guid>
-        <description>&lt;img src="https://sudo-echo-jin.github.io/p/windows-resource/window.jpg" alt="Featured image of post Windows Basic" /&gt;&lt;p&gt;Cover photo by &lt;a class=&#34;link&#34; href=&#34;https://unsplash.com/@slrncl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/windows-resource/window.jpg" alt="Featured image of post Windows Fundamental" /&gt;&lt;p&gt;Cover photo by &lt;a class=&#34;link&#34; href=&#34;https://unsplash.com/@slrncl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://unsplash.com/@slrncl&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;powershell-commands&#34;&gt;Powershell Commands&lt;/h1&gt;
 &lt;h3 id=&#34;services&#34;&gt;Services&lt;/h3&gt;

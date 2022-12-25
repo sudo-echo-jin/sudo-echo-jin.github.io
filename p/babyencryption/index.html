@@ -10,7 +10,7 @@
 <meta property='og:description' content='HTB easy crypto challenge.'>
 <meta property='og:url' content='https://sudo-echo-jin.github.io/p/babyencryption/'>
 <meta property='og:site_name' content='Jin&#39;s Exploit Repo'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='crypto' /><meta property='article:tag' content='easy' /><meta property='article:published_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-03-06T00:00:00&#43;00:00'/><meta property='og:image' content='https://sudo-echo-jin.github.io/p/babyencryption/baby.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='crypto' /><meta property='article:tag' content='python3' /><meta property='article:tag' content='easy' /><meta property='article:published_time' content='2022-12-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-12-21T00:00:00&#43;00:00'/><meta property='og:image' content='https://sudo-echo-jin.github.io/p/babyencryption/baby.jpg' />
 <meta name="twitter:title" content="BabyEncryption">
 <meta name="twitter:description" content="HTB easy crypto challenge."><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://sudo-echo-jin.github.io/p/babyencryption/baby.jpg' />
@@ -243,7 +243,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Mar 06, 2022</time>
+                <time class="article-time--published">Dec 21, 2022</time>
             </div>
         
 
@@ -377,7 +377,7 @@
 <p>Example:</p>
 <p>secret = 6e0a9372ec49a3</p>
 <p>6e0a9372ec49a3 -&gt; 6e|0a|93|72|ec|49|a3 -&gt; map[&lsquo;62&rsquo;], map[&lsquo;0a&rsquo;], map[&lsquo;93&rsquo;], map[&lsquo;72&rsquo;] &hellip;</p>
-<p>The code:</p>
+<p>Decryption code:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -409,7 +409,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">MAP</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">        <span class="n">enc</span> <span class="o">=</span> <span class="p">(</span><span class="mi">123</span> <span class="o">*</span> <span class="n">char</span> <span class="o">+</span> <span class="mi">18</span><span class="p">)</span> <span class="o">%</span> <span class="mi">256</span>
-</span></span><span class="line"><span class="cl">        <span class="n">ct</span> <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="n">enc</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ct</span> <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="n">enc</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Just in case if the hex is only one digit. ex) 0xa &gt; 0x0a</span>
 </span></span><span class="line"><span class="cl">        <span class="n">MAP</span><span class="p">[</span><span class="n">ct</span><span class="p">]</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">MAP</span>
@@ -426,7 +426,7 @@
 </span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>Created map:</p>
+</div><p>Content of <code>MAP</code> variable above:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -660,6 +660,8 @@
     <section class="article-tags">
         
             <a href="/tags/crypto/">crypto</a>
+        
+            <a href="/tags/python3/">python3</a>
         
             <a href="/tags/easy/">easy</a>
         

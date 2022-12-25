@@ -6,10 +6,10 @@
         <description>Recent content in Box on Jin&#39;s Exploit Repo</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/categories/box/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 24 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/categories/box/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Precious</title>
         <link>https://sudo-echo-jin.github.io/p/precious/</link>
-        <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+        <pubDate>Sat, 24 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/p/precious/</guid>
         <description>&lt;img src="https://sudo-echo-jin.github.io/p/precious/Precious.png" alt="Featured image of post Precious" /&gt;&lt;h2 id=&#34;enumeration&#34;&gt;Enumeration&lt;/h2&gt;
@@ -184,8 +184,8 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;The user flag is not in ruby&amp;rsquo;s home dir. Then it must be in henry&amp;rsquo;s.&lt;/p&gt;
-&lt;h4 id=&#34;lateral-movement&#34;&gt;Lateral Movement&lt;/h4&gt;
-&lt;p&gt;One simple thing we can try to find any leads to get henry&amp;rsquo;s credential is searching for any files that contain the username henry. Let&amp;rsquo;s give it a try in ruby&amp;rsquo;s home directory.&lt;/p&gt;
+&lt;h2 id=&#34;lateral-movement&#34;&gt;Lateral Movement&lt;/h2&gt;
+&lt;p&gt;One simple thing we can try to find any leads to get henry&amp;rsquo;s credential is to search for any files that contain the username henry. Let&amp;rsquo;s give it a try in ruby&amp;rsquo;s home directory.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/precious/b5.png&#34;
 	width=&#34;906&#34;
 	height=&#34;146&#34;
@@ -243,7 +243,7 @@
 		data-flex-basis=&#34;963px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;Henry can run sudo with no password to run &lt;em&gt;update_dependencies.rb&lt;/em&gt;. There might be an another vulnerability.&lt;/p&gt;
+&lt;p&gt;Henry can run sudo without the password to run &lt;em&gt;update_dependencies.rb&lt;/em&gt;. There might be an another vulnerability.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/precious/b9.png&#34;
 	width=&#34;789&#34;
 	height=&#34;221&#34;
@@ -456,7 +456,7 @@
         <item>
         <title>Squashed</title>
         <link>https://sudo-echo-jin.github.io/p/squashed/</link>
-        <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+        <pubDate>Tue, 20 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/p/squashed/</guid>
         <description>&lt;img src="https://sudo-echo-jin.github.io/p/squashed/Squashed.png" alt="Featured image of post Squashed" /&gt;&lt;h2 id=&#34;enumeration&#34;&gt;Enumeration&lt;/h2&gt;
