@@ -213,6 +213,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#scripts">Scripts</a></li>
         <li><a href="#windows-management-instrumentation-wmi">Windows Management Instrumentation (WMI)</a></li>
+        <li><a href="#misc">MISC</a></li>
       </ol>
     </li>
   </ol>
@@ -295,7 +296,7 @@
 
 
                 <time class="article-time--reading">
-                    1 minute read
+                    2 minute read
                 </time>
             </div>
         
@@ -312,7 +313,7 @@
     
     <p>Cover photo by <a class="link" href="https://unsplash.com/@slrncl"  target="_blank" rel="noopener"
     >https://unsplash.com/@slrncl</a></p>
-<h1 id="powershell-commands">Powershell Commands</h1>
+<h1 id="commands">Commands</h1>
 <h3 id="services">Services</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -334,11 +335,19 @@
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># List all running services</span>
 </span></span><span class="line"><span class="cl"><span class="nb">Get-Service</span> <span class="p">|</span> <span class="p">?</span> <span class="p">{</span><span class="nv">$_</span><span class="p">.</span><span class="n">Status</span> <span class="o">-eq</span> <span class="s2">&#34;Running&#34;</span><span class="p">}</span> <span class="p">|</span> <span class="nb">select </span><span class="n">-First</span> <span class="n">2</span> <span class="p">|</span><span class="nb">fl
-</span></span></span><span class="line"><span class="cl"><span class="nb"></span>
+</span></span></span><span class="line"><span class="cl"><span class="nb"></span><span class="n">tasklist</span> <span class="p">/</span><span class="n">svc</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Handle specific service</span>
 </span></span><span class="line"><span class="cl"><span class="nb">sc </span><span class="n">qc</span> <span class="n">SERVICE_NAME</span> <span class="c"># Query service</span>
 </span></span><span class="line"><span class="cl"><span class="nb">sc start </span><span class="n">SERVICE_NAME</span>
@@ -352,8 +361,14 @@
 </span></span><span class="line"><span class="cl"><span class="c"># Query specific service with the registry (returns more info than sc)</span>
 </span></span><span class="line"><span class="cl"><span class="nb">Get-ACL</span> <span class="n">-Path</span> <span class="n">HKLM</span><span class="err">:</span><span class="p">\</span><span class="n">PATH</span><span class="p">\</span><span class="n">TO</span><span class="p">\</span><span class="n">SERVICE</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c"># Check Windows Defender</span>
+</span></span><span class="line"><span class="cl"><span class="c"># Check Windows Defender Status</span>
 </span></span><span class="line"><span class="cl"><span class="nb">Get-MpComputerStatus</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># List AppLocker Rules</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-AppLockerPolicy</span> <span class="n">-Effective</span> <span class="p">|</span> <span class="nb">select </span><span class="n">-ExpandProperty</span> <span class="n">RuleCollections</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Test AppLocker Policy</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-AppLockerPolicy</span> <span class="n">-Local</span> <span class="p">|</span> <span class="nb">Test-AppLockerPolicy</span> <span class="n">-path</span> <span class="n">PATH_TO_FILE</span> <span class="n">-User</span> <span class="n">USER</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="scripts">Scripts</h3>
@@ -390,6 +405,47 @@
 </span></span><span class="line"><span class="cl"><span class="nb">Get-WmiObject</span> <span class="c"># Get instances or information of WMI classes</span>
 </span></span><span class="line"><span class="cl"><span class="nb">Get-WmiObject</span> <span class="n">win32_useraccount</span> <span class="c"># List user accounts with sid</span>
 </span></span><span class="line"><span class="cl"><span class="nb">Invoke-WmiMethod</span> <span class="c"># Get methods of WMI objects</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="misc">MISC</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># Environment</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set </span>
+</span></span><span class="line"><span class="cl"><span class="n">systeminfo</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Check quick fix</span>
+</span></span><span class="line"><span class="cl"><span class="n">wmic</span> <span class="n">qfe</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Get-HotFix</span> <span class="p">|</span> <span class="nb">ft </span><span class="n">-AutoSize</span>  <span class="c"># pwsh</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># List installed programs</span>
+</span></span><span class="line"><span class="cl"><span class="n">wmic</span> <span class="n">product</span> <span class="n">get</span> <span class="n">name</span> 
+</span></span><span class="line"><span class="cl"><span class="nb">Get-WmiObject</span> <span class="n">-Class</span> <span class="n">Win32_Product</span> <span class="p">|</span>  <span class="nb">select </span><span class="n">Name</span><span class="p">,</span> <span class="n">Version</span>  <span class="c"># pwsh</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># User &amp; Group</span>
+</span></span><span class="line"><span class="cl"><span class="n">query</span> <span class="n">user</span> <span class="c"># w in linux</span>
+</span></span><span class="line"><span class="cl"><span class="n">net</span> <span class="n">user</span> <span class="c"># list users</span>
+</span></span><span class="line"><span class="cl"><span class="n">net</span> <span class="n">localgroup</span> <span class="c"># list groups</span>
+</span></span><span class="line"><span class="cl"><span class="n">net</span> <span class="n">localgroup</span> <span class="nb">GROUP </span><span class="c"># list members of the group</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
