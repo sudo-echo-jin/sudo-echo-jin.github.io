@@ -6,12 +6,36 @@
         <description>Recent content in Tags on Jin&#39;s Exploit Repo</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 25 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 27 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>easy</title>
         <link>https://sudo-echo-jin.github.io/tags/easy/</link>
-        <pubDate>Sun, 25 Dec 2022 00:00:00 +0000</pubDate>
+        <pubDate>Tue, 27 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/tags/easy/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>php</title>
+        <link>https://sudo-echo-jin.github.io/tags/php/</link>
+        <pubDate>Tue, 27 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/tags/php/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>RCE</title>
+        <link>https://sudo-echo-jin.github.io/tags/rce/</link>
+        <pubDate>Tue, 27 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/tags/rce/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>web</title>
+        <link>https://sudo-echo-jin.github.io/tags/web/</link>
+        <pubDate>Tue, 27 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/tags/web/</guid>
         <description></description>
         </item>
         <item>
