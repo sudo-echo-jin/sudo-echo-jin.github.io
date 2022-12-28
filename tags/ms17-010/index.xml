@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>MS17-010 on Jin&#39;s Exploit Repo</title>
+        <link>https://sudo-echo-jin.github.io/tags/ms17-010/</link>
+        <description>Recent content in MS17-010 on Jin&#39;s Exploit Repo</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Wed, 28 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/tags/ms17-010/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Blue</title>
+        <link>https://sudo-echo-jin.github.io/p/blue/</link>
+        <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/p/blue/</guid>
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/blue/Blue.png" alt="Featured image of post Blue" /&gt;&lt;p&gt;Target IP: 10.10.10.40&lt;/p&gt;
+&lt;h2 id=&#34;enumeration&#34;&gt;Enumeration&lt;/h2&gt;
+&lt;p&gt;As always, begin with the port scanning.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/blue/a1.png&#34;
+	width=&#34;937&#34;
+	height=&#34;469&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;199&#34;
+		data-flex-basis=&#34;479px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;SMB might be running on Windows 7. Let&amp;rsquo;s enumerate SMB little deeper.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/blue/a2.png&#34;
+	width=&#34;942&#34;
+	height=&#34;646&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;145&#34;
+		data-flex-basis=&#34;349px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Yes, it is the EternalBlue vulnerability. &lt;a class=&#34;link&#34; href=&#34;https://www.rapid7.com/db/vulnerabilities/msft-cve-2017-0143/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CVE-2017-0143&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/WannaCry_ransomware_attack&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;WannaCry ransomeware&lt;/a&gt; took advantage of this vulnerability to take over thousands of Windows machines on 2017, the year when I was a freshman studying cybersecurity.&lt;/p&gt;
+&lt;h2 id=&#34;exploit&#34;&gt;Exploit&lt;/h2&gt;
+&lt;p&gt;Launch meatasploit framework and search for EternalBlue exploit modules.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/blue/a3.png&#34;
+	width=&#34;738&#34;
+	height=&#34;767&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;96&#34;
+		data-flex-basis=&#34;230px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/blue/a4.png&#34;
+	width=&#34;956&#34;
+	height=&#34;369&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;259&#34;
+		data-flex-basis=&#34;621px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;re gonna use psexec module which is index number 1.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/blue/a5.png&#34;
+	width=&#34;690&#34;
+	height=&#34;194&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;355&#34;
+		data-flex-basis=&#34;853px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/blue/a6.png&#34;
+	width=&#34;934&#34;
+	height=&#34;697&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;134&#34;
+		data-flex-basis=&#34;321px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Once done setting options, let&amp;rsquo;s exploit.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/blue/a7.png&#34;
+	width=&#34;923&#34;
+	height=&#34;274&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;336&#34;
+		data-flex-basis=&#34;808px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We got the meterpreter shell with the highest privilege account &amp;ldquo;SYSTEM&amp;rdquo; (this is higher than Administrator).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/blue/a8.png&#34;
+	width=&#34;669&#34;
+	height=&#34;180&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;371&#34;
+		data-flex-basis=&#34;892px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Got user flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/blue/a9.png&#34;
+	width=&#34;749&#34;
+	height=&#34;204&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;367&#34;
+		data-flex-basis=&#34;881px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Got root flag.&lt;/p&gt;
+&lt;p&gt;Machine pwned.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
