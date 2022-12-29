@@ -7,6 +7,14 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Wed, 28 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>easy</title>
+        <link>https://sudo-echo-jin.github.io/tags/easy/</link>
+        <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/tags/easy/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>EternalBlue</title>
         <link>https://sudo-echo-jin.github.io/tags/eternalblue/</link>
         <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
@@ -28,6 +36,22 @@
         <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/tags/ms17-010/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>radare2</title>
+        <link>https://sudo-echo-jin.github.io/tags/radare2/</link>
+        <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/tags/radare2/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>reversing</title>
+        <link>https://sudo-echo-jin.github.io/tags/reversing/</link>
+        <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/tags/reversing/</guid>
         <description></description>
         </item>
         <item>
@@ -60,14 +84,6 @@
         <pubDate>Tue, 27 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/tags/web/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>easy</title>
-        <link>https://sudo-echo-jin.github.io/tags/easy/</link>
-        <pubDate>Sun, 25 Dec 2022 00:00:00 +0000</pubDate>
-        
-        <guid>https://sudo-echo-jin.github.io/tags/easy/</guid>
         <description></description>
         </item>
         <item>

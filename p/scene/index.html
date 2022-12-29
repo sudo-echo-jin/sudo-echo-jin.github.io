@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='HTB easy reversing challenge.'>
+<title>Behind the Scenes</title>
+
+<link rel='canonical' href='https://sudo-echo-jin.github.io/p/scene/'>
+
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Behind the Scenes'>
+<meta property='og:description' content='HTB easy reversing challenge.'>
+<meta property='og:url' content='https://sudo-echo-jin.github.io/p/scene/'>
+<meta property='og:site_name' content='Jin&#39;s Exploit Repo'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='reversing' /><meta property='article:tag' content='radare2' /><meta property='article:tag' content='easy' /><meta property='article:published_time' content='2022-12-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-12-28T00:00:00&#43;00:00'/><meta property='og:image' content='https://sudo-echo-jin.github.io/p/scene/scene.jpg' />
+<meta name="twitter:title" content="Behind the Scenes">
+<meta name="twitter:description" content="HTB easy reversing challenge."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://sudo-echo-jin.github.io/p/scene/scene.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/profile_hu57ae8b53bdad88fe9264e8a6db5fab4f_222163_300x0_resize_q75_box.jpg" width="300"
+                            height="169" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Jin&#39;s Exploit Repo</a></h1>
+            <h2 class="site-description">Explore fun stuffs here</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/scene/">
+                <img src="/p/scene/scene.jpg"
+                        
+                        width="1920" 
+                        height="2400" 
+                        loading="lazy"
+                        alt="Featured image of post Behind the Scenes" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/challenge/" style="background-color: #2a9d8f; color: #fff;">
+                Challenge
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/scene/">Behind the Scenes</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            HTB easy reversing challenge.
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 28, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>Cover photo by <a class="link" href="https://unsplash.com/@liammcgarry"  target="_blank" rel="noopener"
+    >https://unsplash.com/@liammcgarry</a></p>
+<h1 id="scenario">Scenario</h1>
+<blockquote>
+<p>&ldquo;After struggling to secure our secret strings for a long time, we finally figured out the solution to our problem: Make decompilation harder. It should now be impossible to figure out how our programs work!&rdquo; - HTB challenge</p>
+</blockquote>
+<h1 id="lets-begin">Let&rsquo;s begin</h1>
+<p>Extract the zip file, and we get a elf binary.</p>
+<p><img src="/p/scene/a1.png"
+	width="678"
+	height="246"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="275"
+		data-flex-basis="661px"
+	
+></p>
+<p>When executed</p>
+<p><img src="/p/scene/a2.png"
+	width="482"
+	height="231"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="208"
+		data-flex-basis="500px"
+	
+></p>
+<p>Giving a sample password does nothing. Tried to give a very long input to check bof, but nothing happened.</p>
+<p>Time to disassemble.</p>
+<p><img src="/p/scene/a3.png"
+	width="732"
+	height="952"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="76"
+		data-flex-basis="184px"
+	
+></p>
+<p>This is our main function. One uncommon thing that sticks out is that the function ends with &ldquo;ud2&rdquo; instead of &ldquo;ret&rdquo; or something.</p>
+<p><img src="/p/scene/a4.png"
+	width="1334"
+	height="736"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="181"
+		data-flex-basis="435px"
+	
+></p>
+<p>However, when we check what&rsquo;s after that ud2 at 0x55b1eeb752e6, we can verify that there are some more codes present in the main function which are not interpreted in the graph mode maybe because of the &ldquo;ud2&rdquo;.</p>
+<p><a class="link" href="https://mudongliang.github.io/x86/html/file_module_x86_id_318.html"  target="_blank" rel="noopener"
+    >What is ud2?</a></p>
+<p>It raises the undefined opcode exception and ends the program. Developers use this for various reasons. One example is to hide the code after ud2. Reverse engineering tools won&rsquo;t automatically analyze what&rsquo;s after this instruction, but it doesn&rsquo;t mean that we can&rsquo;t, because the codes are still there.</p>
+<p>Radare2 graph view didn&rsquo;t show us what&rsquo;s after &ldquo;ud2&rdquo; because it doesn&rsquo;t know whether those codes are going to be executed or not. When we are in the default view, it shows the interpreted the instructions regardless.</p>
+<p>Reload this binary with the write mode on radare2 and let&rsquo;s remove all those ud2.</p>
+<p><img src="/p/scene/a5.png"
+	width="447"
+	height="371"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="120"
+		data-flex-basis="289px"
+	
+></p>
+<p>There are total 15 ud2 instructions.</p>
+<p><img src="/p/scene/a6.png"
+	width="336"
+	height="321"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="104"
+		data-flex-basis="251px"
+	
+></p>
+<p>Executed the following command 15 times.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> s `/ad ud2~[0]\`; wx 9090
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>What this does is that it navigates to the address where ud2 is, and writes two &rsquo;nop&rsquo; instructions. Two, because the length of ud2 opcode, 0f0b, is two bytes and we have to overwrite exactly the same length to make the program not crash.</p>
+<p><img src="/p/scene/a7.png"
+	width="433"
+	height="907"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="47"
+		data-flex-basis="114px"
+	
+></p>
+<p>Coming back into the graph view, radare2 can now interprete the full flow of the program.</p>
+<p><img src="/p/scene/a8.png"
+	width="1769"
+	height="540"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="327"
+		data-flex-basis="786px"
+	
+></p>
+<p>From our main function, <code>cmp dword [var_a4h], 2</code> checks whether we provided the argument to the program. If no argument is provided, it goes to the left box, prints out &ldquo;./challenge &lt;password&gt;&rdquo; message and exits the program.</p>
+<p><img src="/p/scene/a9.png"
+	width="1173"
+	height="773"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="151"
+		data-flex-basis="364px"
+	
+></p>
+<p>Now, we are on the right box. In here, <code>cmp rax, 0xc</code> checks whether our argument&rsquo;s length is 12. If the length is not 12, it goes to the right box and exits the program.</p>
+<p><img src="/p/scene/b1.png"
+	width="1194"
+	height="717"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="166"
+		data-flex-basis="399px"
+	
+></p>
+<p>Let&rsquo;s assume we provided the 12 character long argument and came to the left box. As we can see above, the first three bytes of our argument is being compared to the string &ldquo;Itz&rdquo;. If it matches, we will be sent to the left box. <code>rax</code> contains our string argument and the program loads three characters long string to <code>rsi</code> which will be compared against our argument. <code>mov edx, 3</code> indicates that three bytes will be compared in the <em>strncmp</em> function. To translate it in python syntax, it&rsquo;s like this <code>rax[0:3] == rsi</code></p>
+<p><img src="/p/scene/b2.png"
+	width="836"
+	height="720"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="116"
+		data-flex-basis="278px"
+	
+></p>
+<p>Again, the next three characters are being compared to the string &ldquo;_0n&rdquo;. The only difference is that <code>add rax, 3</code> is added. This is how it compares next three bytes from our argument. <code>rax[0+3:3+3]</code> -&gt; <code>rax[3:6] == rsi</code></p>
+<p>And it repeats.</p>
+<p><img src="/p/scene/b3.png"
+	width="648"
+	height="378"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="171"
+		data-flex-basis="411px"
+	
+></p>
+<p>We see <code>add rax, 6</code>, which indicates that the next three bytes from the previous one will be comapred to &ldquo;Ly_&rdquo;. <code>rax[0+6:3+6]</code> -&gt; <code>rax[6:9] == rsi</code></p>
+<p><img src="/p/scene/b4.png"
+	width="643"
+	height="384"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="167"
+		data-flex-basis="401px"
+	
+></p>
+<p>And the last one being compared, this box checks if our last three characters match &ldquo;UD2&rdquo;. <code>rax[9:12] == rsi</code></p>
+<p><img src="/p/scene/b5.png"
+	width="765"
+	height="668"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="114"
+		data-flex-basis="274px"
+	
+></p>
+<p>If we pass all the tests, we get a flag from this box and the flag is going to be our argument itself, <code>rax</code>. To sum up, the 12 bytes long string argument will be &ldquo;Itz_0nly_UD2&rdquo;.</p>
+<p><img src="/p/scene/b6.png"
+	width="417"
+	height="146"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="285"
+		data-flex-basis="685px"
+	
+></p>
+<p>We got the flag.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/reversing/">reversing</a>
+        
+            <a href="/tags/radare2/">radare2</a>
+        
+            <a href="/tags/easy/">easy</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/babyencryption/">
+        
+        
+            <div class="article-image">
+                <img src="/p/babyencryption/baby.08ed575c88e2db04e6b2686d9b47bc7e.jpg" 
+                        width="1920" 
+                        height="1536" 
+                        loading="lazy"
+                        alt="Featured image of post BabyEncryption"
+                        data-key="babyencryption" 
+                        data-hash="md5-CO1XXIji2wTmsmhtm0e8fg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">BabyEncryption</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/lookglass/">
+        
+        
+            <div class="article-image">
+                <img src="/p/lookglass/glass.fa2e365a2e16e8c6582d899e029ad2c9.jpg" 
+                        width="1920" 
+                        height="2876" 
+                        loading="lazy"
+                        alt="Featured image of post Looking Glass"
+                        data-key="lookglass" 
+                        data-hash="md5-&#43;i42Wi4W6MZYLYmeAprSyQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Looking Glass</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2022 Jin&#39;s Exploit Repo
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
