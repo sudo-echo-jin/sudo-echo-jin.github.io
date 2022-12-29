@@ -76,7 +76,7 @@
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://mudongliang.github.io/x86/html/file_module_x86_id_318.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;What is ud2?&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;It raises the undefined opcode exception and ends the program. Developers use this for various reasons. One example is to hide the code after ud2. Reverse engineering tools won&amp;rsquo;t automatically analyze what&amp;rsquo;s after this instruction, but it doesn&amp;rsquo;t mean that we can&amp;rsquo;t, because the codes are still there.&lt;/p&gt;
-&lt;p&gt;Radare2 graph view didn&amp;rsquo;t show us what&amp;rsquo;s after &amp;ldquo;ud2&amp;rdquo; because it doesn&amp;rsquo;t know whether those codes are going to be executed or not. When we are in the default view, it shows the interpreted the instructions regardless.&lt;/p&gt;
+&lt;p&gt;Radare2 graph view didn&amp;rsquo;t show us what&amp;rsquo;s after &amp;ldquo;ud2&amp;rdquo; because it doesn&amp;rsquo;t know whether those codes are going to be executed or not. When we are in the default view, it shows the interpreted instructions regardless.&lt;/p&gt;
 &lt;p&gt;Reload this binary with the write mode on radare2 and let&amp;rsquo;s remove all those ud2.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/scene/a5.png&#34;
 	width=&#34;447&#34;

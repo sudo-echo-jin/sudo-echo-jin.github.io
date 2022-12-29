@@ -337,7 +337,7 @@
 <p><a class="link" href="https://mudongliang.github.io/x86/html/file_module_x86_id_318.html"  target="_blank" rel="noopener"
     >What is ud2?</a></p>
 <p>It raises the undefined opcode exception and ends the program. Developers use this for various reasons. One example is to hide the code after ud2. Reverse engineering tools won&rsquo;t automatically analyze what&rsquo;s after this instruction, but it doesn&rsquo;t mean that we can&rsquo;t, because the codes are still there.</p>
-<p>Radare2 graph view didn&rsquo;t show us what&rsquo;s after &ldquo;ud2&rdquo; because it doesn&rsquo;t know whether those codes are going to be executed or not. When we are in the default view, it shows the interpreted the instructions regardless.</p>
+<p>Radare2 graph view didn&rsquo;t show us what&rsquo;s after &ldquo;ud2&rdquo; because it doesn&rsquo;t know whether those codes are going to be executed or not. When we are in the default view, it shows the interpreted instructions regardless.</p>
 <p>Reload this binary with the write mode on radare2 and let&rsquo;s remove all those ud2.</p>
 <p><img src="/p/scene/a5.png"
 	width="447"
