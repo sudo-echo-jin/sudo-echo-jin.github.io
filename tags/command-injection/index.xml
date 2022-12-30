@@ -12,7 +12,10 @@
         <pubDate>Sat, 24 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/p/precious/</guid>
-        <description>&lt;img src="https://sudo-echo-jin.github.io/p/precious/Precious.png" alt="Featured image of post Precious" /&gt;&lt;h2 id=&#34;enumeration&#34;&gt;Enumeration&lt;/h2&gt;
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/precious/precious.jpg" alt="Featured image of post Precious" /&gt;&lt;p&gt;Cover photo by &lt;a class=&#34;link&#34; href=&#34;https://unsplash.com/@enginakyurt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://unsplash.com/@enginakyurt&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;enumeration&#34;&gt;Enumeration&lt;/h2&gt;
+&lt;p&gt;Target IP: 10.10.11.189&lt;/p&gt;
 &lt;p&gt;Start with nmap scan&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;

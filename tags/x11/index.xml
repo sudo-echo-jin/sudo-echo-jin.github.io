@@ -12,7 +12,9 @@
         <pubDate>Tue, 20 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/p/squashed/</guid>
-        <description>&lt;img src="https://sudo-echo-jin.github.io/p/squashed/Squashed.png" alt="Featured image of post Squashed" /&gt;&lt;h2 id=&#34;enumeration&#34;&gt;Enumeration&lt;/h2&gt;
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/squashed/sq.jpg" alt="Featured image of post Squashed" /&gt;&lt;p&gt;Cover photo by &lt;a class=&#34;link&#34; href=&#34;https://unsplash.com/@kikesalazarn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://unsplash.com/@kikesalazarn&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;enumeration&#34;&gt;Enumeration&lt;/h2&gt;
 &lt;p&gt;Our target&amp;rsquo;s IP address is 10.10.11.191.&lt;/p&gt;
 &lt;p&gt;Let&amp;rsquo;s begin with port scanning.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/sudo-echo-jin/blog/main/squashed/a1.png&#34;

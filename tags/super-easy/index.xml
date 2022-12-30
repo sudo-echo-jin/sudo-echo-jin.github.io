@@ -12,8 +12,10 @@
         <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/p/blue/</guid>
-        <description>&lt;img src="https://sudo-echo-jin.github.io/p/blue/Blue.png" alt="Featured image of post Blue" /&gt;&lt;p&gt;Target IP: 10.10.10.40&lt;/p&gt;
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/blue/blue.jpg" alt="Featured image of post Blue" /&gt;&lt;p&gt;Cover photo by &lt;a class=&#34;link&#34; href=&#34;https://unsplash.com/@adrienl&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://unsplash.com/@adrienl&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;enumeration&#34;&gt;Enumeration&lt;/h2&gt;
+&lt;p&gt;Target IP: 10.10.10.40&lt;/p&gt;
 &lt;p&gt;As always, begin with the port scanning.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/blue/a1.png&#34;
 	width=&#34;937&#34;
