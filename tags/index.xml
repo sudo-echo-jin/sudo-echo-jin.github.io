@@ -6,7 +6,31 @@
         <description>Recent content in Tags on Jin&#39;s Exploit Repo</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 28 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 01 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>buffer overflow</title>
+        <link>https://sudo-echo-jin.github.io/tags/buffer-overflow/</link>
+        <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/tags/buffer-overflow/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>reversing</title>
+        <link>https://sudo-echo-jin.github.io/tags/reversing/</link>
+        <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/tags/reversing/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>super easy</title>
+        <link>https://sudo-echo-jin.github.io/tags/super-easy/</link>
+        <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/tags/super-easy/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>easy</title>
         <link>https://sudo-echo-jin.github.io/tags/easy/</link>
         <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
@@ -44,22 +68,6 @@
         <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/tags/radare2/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>reversing</title>
-        <link>https://sudo-echo-jin.github.io/tags/reversing/</link>
-        <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
-        
-        <guid>https://sudo-echo-jin.github.io/tags/reversing/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>super easy</title>
-        <link>https://sudo-echo-jin.github.io/tags/super-easy/</link>
-        <pubDate>Wed, 28 Dec 2022 00:00:00 +0000</pubDate>
-        
-        <guid>https://sudo-echo-jin.github.io/tags/super-easy/</guid>
         <description></description>
         </item>
         <item>

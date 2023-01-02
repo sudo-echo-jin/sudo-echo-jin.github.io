@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>buffer overflow on Jin&#39;s Exploit Repo</title>
+        <link>https://sudo-echo-jin.github.io/tags/buffer-overflow/</link>
+        <description>Recent content in buffer overflow on Jin&#39;s Exploit Repo</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sun, 01 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/tags/buffer-overflow/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Jeeves</title>
+        <link>https://sudo-echo-jin.github.io/p/jeeves/</link>
+        <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/p/jeeves/</guid>
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/jeeves/jeeves.jpg" alt="Featured image of post Jeeves" /&gt;&lt;h1 id=&#34;scenario&#34;&gt;Scenario&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;How are you doing, sir?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;lets-begin&#34;&gt;Let&amp;rsquo;s begin&lt;/h1&gt;
+&lt;p&gt;Target: 161.35.46.143&lt;/p&gt;
+&lt;p&gt;Port: 30215&lt;/p&gt;
+&lt;p&gt;We have something running on the server.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/a1.png&#34;
+	width=&#34;732&#34;
+	height=&#34;189&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;387&#34;
+		data-flex-basis=&#34;929px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;It is a simple program that takes user input and prints it back.&lt;/p&gt;
+&lt;p&gt;Kindly enough, the challenge also provided us the binary.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/a2.png&#34;
+	width=&#34;397&#34;
+	height=&#34;122&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;325&#34;
+		data-flex-basis=&#34;780px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/a3.png&#34;
+	width=&#34;476&#34;
+	height=&#34;156&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;305&#34;
+		data-flex-basis=&#34;732px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s see how this works.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/a4.png&#34;
+	width=&#34;880&#34;
+	height=&#34;761&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;115&#34;
+		data-flex-basis=&#34;277px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We have a main function.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/a5.png&#34;
+	width=&#34;937&#34;
+	height=&#34;826&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;113&#34;
+		data-flex-basis=&#34;272px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;As we can see above, &lt;code&gt;gets&lt;/code&gt; function takes our input and it is printed by &lt;code&gt;printf&lt;/code&gt; function. Not only that, at the end of main function, it compares a variable &lt;code&gt;var_4h&lt;/code&gt; with the hex value &lt;code&gt;0x1337bab3&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/a6.png&#34;
+	width=&#34;1151&#34;
+	height=&#34;980&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;117&#34;
+		data-flex-basis=&#34;281px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;If &lt;code&gt;var_4h&lt;/code&gt; is equal to &lt;code&gt;0x1337bab3&lt;/code&gt;, the flow goes to the other box which seems like it&amp;rsquo;s reading the flag from flag.txt and prints it out.&lt;/p&gt;
+&lt;p&gt;So, it is our job to set the value of &lt;code&gt;var_4h&lt;/code&gt; to &lt;code&gt;0x1337bab3&lt;/code&gt; in this challenge and it can be achieved through buffer overflow.&lt;/p&gt;
+&lt;p&gt;It is noticeable to conclude that it&amp;rsquo;s a buffer overflow challenge because there&amp;rsquo;s a &lt;code&gt;gets&lt;/code&gt; function which doesn&amp;rsquo;t check the size of user input. This is a vulnerable function which can lead to buffer overflow attacks. Let&amp;rsquo;s go back to our main function.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/a7.png&#34;
+	width=&#34;653&#34;
+	height=&#34;146&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;447&#34;
+		data-flex-basis=&#34;1073px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sub rsp, 0x40&lt;/code&gt; | The size of the stack is 64 bytes.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;; var int64_t var_4h @ rbp-0x4&lt;/code&gt; | var_4h is located at &lt;code&gt;rbp-0x4&lt;/code&gt; which is also &lt;code&gt;rsp+60&lt;/code&gt; as shown below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/a8.png&#34;
+	width=&#34;277&#34;
+	height=&#34;41&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;675&#34;
+		data-flex-basis=&#34;1621px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/a9.png&#34;
+	width=&#34;277&#34;
+	height=&#34;45&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;615&#34;
+		data-flex-basis=&#34;1477px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mov dword [var_4h], 0xdeadc0d3&lt;/code&gt; | The initial value of &lt;code&gt;var_4h&lt;/code&gt; is set.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/b1.png&#34;
+	width=&#34;796&#34;
+	height=&#34;115&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;692&#34;
+		data-flex-basis=&#34;1661px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;When I put &amp;lsquo;aaaaaaaa&amp;rsquo; as an input, the stack looks like this. The string is saved in &lt;code&gt;var_40h&lt;/code&gt; which is located at &lt;code&gt;rbp-0x40&lt;/code&gt;, which is the very bottom of the stack, at rsp.&lt;/p&gt;
+&lt;p&gt;As we can see from the screenshot above, we need to put 60 bytes of random string (rsp+60) and four more bytes to overwrite &lt;code&gt;0xdeadc0d3&lt;/code&gt; which is &lt;code&gt;var_4h&lt;/code&gt; that we want to control.&lt;/p&gt;
+&lt;p&gt;Create a sample payload with python, &lt;code&gt;python3 -c &amp;quot;print(&#39;a&#39;*60 + &#39;bbbb&#39;)&amp;quot;&lt;/code&gt; and give it as an input.&lt;/p&gt;
+&lt;p&gt;Now the stack looks like this&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/b2.png&#34;
+	width=&#34;815&#34;
+	height=&#34;110&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;740&#34;
+		data-flex-basis=&#34;1778px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;We successfully overwrote &lt;code&gt;0xdeadc0d3&lt;/code&gt; to &lt;code&gt;bbbb&lt;/code&gt;. Now what we have to do simply is to change &lt;code&gt;bbbb&lt;/code&gt; to &lt;code&gt;0x1337bab3&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Payload:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Python3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;python3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;import sys; sys.stdout.buffer.write(b&amp;#39;a&amp;#39;*60 + b&amp;#39;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\xb3\xba\x37\x13&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#39;+b&amp;#39;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\x0a&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#39;)&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;`&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Python2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;python2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;print &amp;#39;a&amp;#39;*60 + &amp;#39;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\xb3\xba\x37\x13&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#39;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Bash echo&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\xb3\xba\x37\x13&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Choose&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;what&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;you&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;prefer&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/b3.png&#34;
+	width=&#34;881&#34;
+	height=&#34;119&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;740&#34;
+		data-flex-basis=&#34;1776px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Verified that it works as we intended. &lt;code&gt;0xdeadc0d3&lt;/code&gt; is now &lt;code&gt;0x1337bab3&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s give this to the server and get the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/jeeves/b4.png&#34;
+	width=&#34;1496&#34;
+	height=&#34;165&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;906&#34;
+		data-flex-basis=&#34;2176px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Welcome to land of pwn &amp;amp; pain!&lt;/p&gt;
+&lt;p&gt;we got the flag.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

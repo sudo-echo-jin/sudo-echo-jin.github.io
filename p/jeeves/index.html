@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='HTB easy reversing challenge.'>
+<title>Jeeves</title>
+
+<link rel='canonical' href='https://sudo-echo-jin.github.io/p/jeeves/'>
+
+<link rel="stylesheet" href="/scss/style.min.8191399262444ab68b72a18c97392f5349be20a1615d77445be51e974c144cff.css"><meta property='og:title' content='Jeeves'>
+<meta property='og:description' content='HTB easy reversing challenge.'>
+<meta property='og:url' content='https://sudo-echo-jin.github.io/p/jeeves/'>
+<meta property='og:site_name' content='Jin&#39;s Exploit Repo'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='reversing' /><meta property='article:tag' content='buffer overflow' /><meta property='article:tag' content='super easy' /><meta property='article:published_time' content='2023-01-01T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-01-01T00:00:00&#43;00:00'/><meta property='og:image' content='https://sudo-echo-jin.github.io/p/jeeves/jeeves.jpg' />
+<meta name="twitter:title" content="Jeeves">
+<meta name="twitter:description" content="HTB easy reversing challenge."><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://sudo-echo-jin.github.io/p/jeeves/jeeves.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/profile_hu57ae8b53bdad88fe9264e8a6db5fab4f_222163_300x0_resize_q75_box.jpg" width="300"
+                            height="169" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Jin&#39;s Exploit Repo</a></h1>
+            <h2 class="site-description">Explore fun stuffs here</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/jeeves/">
+                <img src="/p/jeeves/jeeves.jpg"
+                        
+                        width="504" 
+                        height="700" 
+                        loading="lazy"
+                        alt="Featured image of post Jeeves" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/challenge/" style="background-color: #2a9d8f; color: #fff;">
+                Challenge
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/jeeves/">Jeeves</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            HTB easy reversing challenge.
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 01, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="scenario">Scenario</h1>
+<blockquote>
+<p>How are you doing, sir?</p>
+</blockquote>
+<h1 id="lets-begin">Let&rsquo;s begin</h1>
+<p>Target: 161.35.46.143</p>
+<p>Port: 30215</p>
+<p>We have something running on the server.</p>
+<p><img src="/p/jeeves/a1.png"
+	width="732"
+	height="189"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="387"
+		data-flex-basis="929px"
+	
+></p>
+<p>It is a simple program that takes user input and prints it back.</p>
+<p>Kindly enough, the challenge also provided us the binary.</p>
+<p><img src="/p/jeeves/a2.png"
+	width="397"
+	height="122"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="325"
+		data-flex-basis="780px"
+	
+></p>
+<p><img src="/p/jeeves/a3.png"
+	width="476"
+	height="156"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="305"
+		data-flex-basis="732px"
+	
+></p>
+<p>Let&rsquo;s see how this works.</p>
+<p><img src="/p/jeeves/a4.png"
+	width="880"
+	height="761"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="115"
+		data-flex-basis="277px"
+	
+></p>
+<p>We have a main function.</p>
+<p><img src="/p/jeeves/a5.png"
+	width="937"
+	height="826"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="113"
+		data-flex-basis="272px"
+	
+></p>
+<p>As we can see above, <code>gets</code> function takes our input and it is printed by <code>printf</code> function. Not only that, at the end of main function, it compares a variable <code>var_4h</code> with the hex value <code>0x1337bab3</code>.</p>
+<p><img src="/p/jeeves/a6.png"
+	width="1151"
+	height="980"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="117"
+		data-flex-basis="281px"
+	
+></p>
+<p>If <code>var_4h</code> is equal to <code>0x1337bab3</code>, the flow goes to the other box which seems like it&rsquo;s reading the flag from flag.txt and prints it out.</p>
+<p>So, it is our job to set the value of <code>var_4h</code> to <code>0x1337bab3</code> in this challenge and it can be achieved through buffer overflow.</p>
+<p>It is noticeable to conclude that it&rsquo;s a buffer overflow challenge because there&rsquo;s a <code>gets</code> function which doesn&rsquo;t check the size of user input. This is a vulnerable function which can lead to buffer overflow attacks. Let&rsquo;s go back to our main function.</p>
+<p><img src="/p/jeeves/a7.png"
+	width="653"
+	height="146"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="447"
+		data-flex-basis="1073px"
+	
+></p>
+<p><code>sub rsp, 0x40</code> | The size of the stack is 64 bytes.</p>
+<p><code>; var int64_t var_4h @ rbp-0x4</code> | var_4h is located at <code>rbp-0x4</code> which is also <code>rsp+60</code> as shown below.</p>
+<p><img src="/p/jeeves/a8.png"
+	width="277"
+	height="41"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="675"
+		data-flex-basis="1621px"
+	
+></p>
+<p><img src="/p/jeeves/a9.png"
+	width="277"
+	height="45"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="615"
+		data-flex-basis="1477px"
+	
+></p>
+<p><code>mov dword [var_4h], 0xdeadc0d3</code> | The initial value of <code>var_4h</code> is set.</p>
+<p><img src="/p/jeeves/b1.png"
+	width="796"
+	height="115"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="692"
+		data-flex-basis="1661px"
+	
+></p>
+<p>When I put &lsquo;aaaaaaaa&rsquo; as an input, the stack looks like this. The string is saved in <code>var_40h</code> which is located at <code>rbp-0x40</code>, which is the very bottom of the stack, at rsp.</p>
+<p>As we can see from the screenshot above, we need to put 60 bytes of random string (rsp+60) and four more bytes to overwrite <code>0xdeadc0d3</code> which is <code>var_4h</code> that we want to control.</p>
+<p>Create a sample payload with python, <code>python3 -c &quot;print('a'*60 + 'bbbb')&quot;</code> and give it as an input.</p>
+<p>Now the stack looks like this</p>
+<p><img src="/p/jeeves/b2.png"
+	width="815"
+	height="110"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="740"
+		data-flex-basis="1778px"
+	
+></p>
+<p>We successfully overwrote <code>0xdeadc0d3</code> to <code>bbbb</code>. Now what we have to do simply is to change <code>bbbb</code> to <code>0x1337bab3</code>.</p>
+<p>Payload:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Python3</span>
+</span></span><span class="line"><span class="cl"><span class="n">python3</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&#34;import sys; sys.stdout.buffer.write(b&#39;a&#39;*60 + b&#39;</span><span class="se">\xb3\xba\x37\x13</span><span class="s2">&#39;+b&#39;</span><span class="se">\x0a</span><span class="s2">&#39;)&#34;</span><span class="err">`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Python2</span>
+</span></span><span class="line"><span class="cl"><span class="n">python2</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&#34;print &#39;a&#39;*60 + &#39;</span><span class="se">\xb3\xba\x37\x13</span><span class="s2">&#39;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Bash echo</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&#34;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span><span class="se">\xb3\xba\x37\x13</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Choose</span> <span class="n">what</span> <span class="n">you</span> <span class="n">prefer</span><span class="o">.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/jeeves/b3.png"
+	width="881"
+	height="119"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="740"
+		data-flex-basis="1776px"
+	
+></p>
+<p>Verified that it works as we intended. <code>0xdeadc0d3</code> is now <code>0x1337bab3</code>.</p>
+<p>Let&rsquo;s give this to the server and get the flag.</p>
+<p><img src="/p/jeeves/b4.png"
+	width="1496"
+	height="165"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="906"
+		data-flex-basis="2176px"
+	
+></p>
+<p>Welcome to land of pwn &amp; pain!</p>
+<p>we got the flag.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/reversing/">reversing</a>
+        
+            <a href="/tags/buffer-overflow/">buffer overflow</a>
+        
+            <a href="/tags/super-easy/">super easy</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/scene/">
+        
+        
+            <div class="article-image">
+                <img src="/p/scene/cover2.59adf8ac07cd27466d8eae92d34ae384.jpg" 
+                        width="3213" 
+                        height="4016" 
+                        loading="lazy"
+                        alt="Featured image of post Behind the Scenes"
+                        data-key="scene" 
+                        data-hash="md5-Wa34rAfNJ0Ztjq6S00rjhA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Behind the Scenes</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/lookglass/">
+        
+        
+            <div class="article-image">
+                <img src="/p/lookglass/glass.fa2e365a2e16e8c6582d899e029ad2c9.jpg" 
+                        width="1920" 
+                        height="2876" 
+                        loading="lazy"
+                        alt="Featured image of post Looking Glass"
+                        data-key="lookglass" 
+                        data-hash="md5-&#43;i42Wi4W6MZYLYmeAprSyQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Looking Glass</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/babyencryption/">
+        
+        
+            <div class="article-image">
+                <img src="/p/babyencryption/baby.08ed575c88e2db04e6b2686d9b47bc7e.jpg" 
+                        width="1920" 
+                        height="1536" 
+                        loading="lazy"
+                        alt="Featured image of post BabyEncryption"
+                        data-key="babyencryption" 
+                        data-hash="md5-CO1XXIji2wTmsmhtm0e8fg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">BabyEncryption</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2023 Jin&#39;s Exploit Repo
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
