@@ -3,7 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://sudo-echo-jin.github.io/</loc>
-    <lastmod>2023-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2023-01-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sudo-echo-jin.github.io/p/dante/</loc>
+    <lastmod>2023-01-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://sudo-echo-jin.github.io/post/</loc>
+    <lastmod>2023-01-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sudo-echo-jin.github.io/tags/buffer-overflow/</loc>
     <lastmod>2023-01-01T00:00:00+00:00</lastmod>
@@ -15,9 +21,6 @@
     <lastmod>2023-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sudo-echo-jin.github.io/p/jeeves/</loc>
-    <lastmod>2023-01-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://sudo-echo-jin.github.io/post/</loc>
     <lastmod>2023-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://sudo-echo-jin.github.io/tags/reversing/</loc>

@@ -6,7 +6,42 @@
         <description>Recent content on Jin&#39;s Exploit Repo</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 01 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 05 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Completion of HTB Pro Lab - Dante</title>
+        <link>https://sudo-echo-jin.github.io/p/dante/</link>
+        <pubDate>Thu, 05 Jan 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://sudo-echo-jin.github.io/p/dante/</guid>
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/dante/dantecover.jpg" alt="Featured image of post Completion of HTB Pro Lab - Dante" /&gt;&lt;p&gt;During this winter break, I worked on HTB&amp;rsquo;s Dante Pro Lab with my hacker friends, &lt;a class=&#34;link&#34; href=&#34;https://www.linkedin.com/in/sasha-thomas2718/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Sasha Thomas&lt;/a&gt; and &lt;a class=&#34;link&#34; href=&#34;https://www.linkedin.com/in/c-shaffer/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Carson Shaffer&lt;/a&gt;. This was such a rewarding and fun lab to do over the break.&lt;/p&gt;
+&lt;p&gt;This lab offers well simulated company network that consists of windows and linux machines, including the firewall. Combining all the pentesting skills and techniques achieved from other CTF challenges, we were able to get root on all 14 machines.&lt;/p&gt;
+&lt;p&gt;What I learned the most from this lab is the pivoting technique. This is something that was new to me and other boxes or challenges can&amp;rsquo;t offer the learning opportunity on this concept due to the limitation that they are just the single host in the same network with the attacker. However, in this lab environment, I&amp;rsquo;ve had a lot of chances for hands-on experiences on practical use of pivioting skills. Doing this lab, one will be familiarized with these following tools.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MSF (provides lot of pivoting functionalities)&lt;/li&gt;
+&lt;li&gt;Chisel&lt;/li&gt;
+&lt;li&gt;Ligolo-ng&lt;/li&gt;
+&lt;li&gt;Proxychains&lt;/li&gt;
+&lt;li&gt;SSH tunneling&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It took about two weeks to compromise the entire company network (I was the last one to finsih which slightly went over two weeks). So, I spent like 80% of the winter break completing this pro lab, and it was definitely worth doing it after all. It was especially more fun to do it together, because we had different approach and exploited different vulnerabilities on some occasion, which gave me more learning opportunities and broaden my insights. Thanks and respects to these two Purdue wizards, &lt;a class=&#34;link&#34; href=&#34;https://www.linkedin.com/in/sasha-thomas2718/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Sasha&lt;/a&gt; and &lt;a class=&#34;link&#34; href=&#34;https://www.linkedin.com/in/c-shaffer/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Carson&lt;/a&gt; for inviting me to this precious experience and the share of great knowledge.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://sudo-echo-jin.github.io/p/dante/dante.jpg&#34;
+	width=&#34;2339&#34;
+	height=&#34;1654&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;141&#34;
+		data-flex-basis=&#34;339px&#34;
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Jeeves</title>
         <link>https://sudo-echo-jin.github.io/p/jeeves/</link>
         <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
