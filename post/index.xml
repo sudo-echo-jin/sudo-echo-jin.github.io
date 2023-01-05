@@ -7,12 +7,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Thu, 05 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://sudo-echo-jin.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Completion of HTB Pro Lab - Dante</title>
+        <title>Dante</title>
         <link>https://sudo-echo-jin.github.io/p/dante/</link>
         <pubDate>Thu, 05 Jan 2023 00:00:00 +0000</pubDate>
         
         <guid>https://sudo-echo-jin.github.io/p/dante/</guid>
-        <description>&lt;img src="https://sudo-echo-jin.github.io/p/dante/dantecover.jpg" alt="Featured image of post Completion of HTB Pro Lab - Dante" /&gt;&lt;p&gt;During this winter break, I worked on HTB&amp;rsquo;s Dante Pro Lab with my hacker friends, &lt;a class=&#34;link&#34; href=&#34;https://www.linkedin.com/in/sasha-thomas2718/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <description>&lt;img src="https://sudo-echo-jin.github.io/p/dante/dantecover.jpg" alt="Featured image of post Dante" /&gt;&lt;p&gt;During this winter break, I worked on HTB&amp;rsquo;s Dante Pro Lab with my hacker friends, &lt;a class=&#34;link&#34; href=&#34;https://www.linkedin.com/in/sasha-thomas2718/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Sasha Thomas&lt;/a&gt; and &lt;a class=&#34;link&#34; href=&#34;https://www.linkedin.com/in/c-shaffer/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Carson Shaffer&lt;/a&gt;. This was such a rewarding and fun lab to do over the break.&lt;/p&gt;
 &lt;p&gt;This lab offers well simulated company network that consists of windows and linux machines, including the firewall. Combining all the pentesting skills and techniques achieved from other CTF challenges, we were able to get root on all 14 machines.&lt;/p&gt;
@@ -39,6 +39,8 @@
 		data-flex-basis=&#34;339px&#34;
 	
 &gt;&lt;/p&gt;
+&lt;p&gt;You get a certificate upon completion of this lab. For more info, &lt;a class=&#34;link&#34; href=&#34;https://app.hackthebox.com/prolabs/overview/dante&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Click Here&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
